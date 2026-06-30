@@ -8,7 +8,7 @@
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/Infrasity-Labs/awersome-developer-conferences/blob/master/CONTRIBUTING.md)
 
 
-  <img src="assets/image.png" width="1000" alt="Awesome Tech Newsletters Banner" />
+  <img src="assets/image.png" width="1000" alt="Awesome Developer Podcasts Banner" />
 
 </div>
 
@@ -103,10 +103,10 @@ A curated directory of the best podcasts for programmers, web developers, and so
 
 Maintained by **[Infrasity](https://infrasity.com)**<br>A developer marketing agency helping DevTool startups and B2B SaaS companies with technical content, DevRel strategy, and GTM.
 
-We maintain this list because we research these events for our clients. If you're a DevRel or developer marketing team looking for conference strategy, [let's talk](https://infrasity.com).
+We maintain this list as part of our ongoing research into where developers actually spend their time. If your DevRel or developer marketing team needs help navigating podcast sponsorships or getting your founders booked on the right shows, [let's talk](https://infrasity.com).
 
 [infrasity.com](https://infrasity.com) · [LinkedIn](https://linkedin.com/company/infrasity) 
 
 ---
 
-Missing an event? [Open a PR](CONTRIBUTING.md) or [file an issue](https://github.com/Infrasity-Labs/awersome-developer-conferences/issues/new).
+Missing a podcast? [Open a PR](CONTRIBUTING.md) or [file an issue](https://github.com/Infrasity-Labs/awersome-developer-podcasts/issues/new).
