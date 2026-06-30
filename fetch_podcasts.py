@@ -1,9 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 def fetch_podcasts():
     url = "https://transistor.fm/dev-podcasts/"
-    response = requests.get(url, timeout=10)
+    response = requests.get(url)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -24,7 +25,7 @@ def fetch_podcasts():
                 if len(paragraphs) > 1:
                     a_tag = paragraphs[1].find('a')
                     if a_tag:
-                        link = a_tag.get('href', '')
+                        link = a_tag['href']
                         
                 podcasts.append({
                     'title': title,
@@ -36,8 +37,6 @@ def fetch_podcasts():
 
 if __name__ == "__main__":
     podcasts = fetch_podcasts()
-    print(f"Found {len(podcasts)} podcasts:")
-    for podcast in podcasts:
-        print(f"\nTitle: {podcast['title']}")
-        print(f"Description: {podcast['description']}")
-        print(f"Link: {podcast['link']}")
+    with open('transistor.json', 'w') as f:
+        json.dump(podcasts, f, indent=4)
+    print(f"Saved {len(podcasts)} podcasts to transistor.json")

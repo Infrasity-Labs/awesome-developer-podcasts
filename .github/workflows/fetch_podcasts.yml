@@ -33,18 +33,19 @@ jobs:
           echo "Starting fetchers..."
           # Loop through all python files starting with "fetch_"
           for fetcher in fetch_*.py; do
-            # Ensure the file exists
             if [ -f "$fetcher" ]; then
               echo "======================================"
               echo "Running $fetcher"
               echo "======================================"
-              
-              # Run the script. The "||" means if the python script fails (returns an error code),
-              # it will execute the echo command instead of failing the whole job.
-              # This ensures the loop continues to the next fetcher!
               python "$fetcher" || echo "::warning title=Fetcher Failed::Script $fetcher encountered an error, skipping to the next."
             fi
           done
+
+      - name: Update README
+        run: |
+          python update_readme.py
+          # Optional: Remove json files so they aren't committed to the repo
+          rm -f *.json
 
       - name: Commit and Push Changes
         run: |
