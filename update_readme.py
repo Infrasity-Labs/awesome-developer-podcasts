@@ -35,7 +35,7 @@ def update_readme():
         
         # Only create a link if one exists
         if link:
-            link_md = f"[Link]({link})"
+            link_md = f"[[↗]]({link})"
         else:
             link_md = ""
             
