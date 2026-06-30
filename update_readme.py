@@ -21,14 +21,24 @@ def update_readme():
         return
         
     # Preserve existing header
+        # Preserve existing header and footer
     header = ""
+    footer = ""
     try:
         with open('README.md', 'r') as f:
             lines = f.readlines()
-            for line in lines:
+            table_start_idx = len(lines)
+            footer_start_idx = len(lines)
+            for i, line in enumerate(lines):
                 if line.startswith("| Podcast Name") or line.startswith("## Software Engineering") or line.startswith("### Software Engineering") or line.startswith("## GTM") or line.startswith("### GTM") or line.startswith("## Developer Marketing") or line.startswith("### Developer Marketing") or line.startswith("## Technical Content Marketing") or line.startswith("### Technical Content Marketing"):
-                    break
-                header += line
+                    if table_start_idx == len(lines):
+                        table_start_idx = i
+                if "<!-- FOOTER -->" in line or line.startswith("## About"):
+                    if footer_start_idx == len(lines):
+                        footer_start_idx = i
+            header = "".join(lines[:table_start_idx])
+            if footer_start_idx < len(lines):
+                footer = "".join(lines[footer_start_idx:])
     except Exception as e:
         header = "# Awesome Developer Podcasts\n\n"
     
@@ -45,9 +55,9 @@ def update_readme():
     
     for title in sorted(podcasts.keys()):
         p = podcasts[title]
-        desc = p.get('description', '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
+        desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
         safe_title = title.replace('|', '&#124;')
-        link = p.get('link', '').strip()
+        link = (p.get('link') or '').strip()
         
         # Determine vertical
         if desc.startswith('**[GTM]**'):
@@ -81,6 +91,8 @@ def update_readme():
             content += "\n"
         
     # Write back to README.md
+    if footer:
+        content += "\n" + footer
     with open('README.md', 'w') as f:
         f.write(content.strip() + '\n')
         

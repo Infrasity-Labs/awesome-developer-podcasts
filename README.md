@@ -5,7 +5,7 @@
   [![Awesome](https://awesome.re/badge.svg)](https://github.com/sindresorhus/awesome)
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
   [![Maintained by Infrasity](https://img.shields.io/badge/maintained%20by-Infrasity-7B6BFF)](https://www.infrasity.com/)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/Infrasity-Labs/awersome-developer-podcasts/blob/main/CONTRIBUTING.md)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/Infrasity-Labs/awesome-developer-podcasts/blob/main/CONTRIBUTING.md)
 
 
   <img src="assets/image.png" width="1000" alt="Awesome Developer Podcasts Banner" />
