@@ -20,32 +20,71 @@ def update_readme():
         print("No podcasts found in JSON files.")
         return
         
-    # Generate the new README content
-    content = "# Awesome Developer Podcasts\n\n"
-    content += "A curated directory of the best podcasts for programmers, web developers, and software engineers.\n\n"
-    content += "| Podcast Name | Description | Website Link |\n"
-    content += "| --- | --- | --- |\n"
+    # Preserve existing header
+    header = ""
+    try:
+        with open('README.md', 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                if line.startswith("| Podcast Name") or line.startswith("## Software Engineering") or line.startswith("### Software Engineering") or line.startswith("## GTM") or line.startswith("### GTM") or line.startswith("## Developer Marketing") or line.startswith("### Developer Marketing") or line.startswith("## Technical Content Marketing") or line.startswith("### Technical Content Marketing"):
+                    break
+                header += line
+    except Exception as e:
+        header = "# Awesome Developer Podcasts\n\n"
     
-    # Sort alphabetically by title
+    if not header.strip():
+        header = "# Awesome Developer Podcasts\n\n"
+        
+    # Group podcasts into verticals
+    verticals = {
+        "GTM": [],
+        "Developer Marketing": [],
+        "Technical Content Marketing": [],
+        "Software Engineering & Development": []
+    }
+    
     for title in sorted(podcasts.keys()):
         p = podcasts[title]
-        # Clean description of any newlines to avoid breaking the markdown table
-        desc = p.get('description', '').replace('\n', ' ').strip()
-        link = p.get('link', '')
+        desc = p.get('description', '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
+        safe_title = title.replace('|', '&#124;')
+        link = p.get('link', '').strip()
         
-        # Only create a link if one exists
-        if link:
-            link_md = f"[[↗]]({link})"
+        # Determine vertical
+        if desc.startswith('**[GTM]**'):
+            vertical = "GTM"
+            desc = desc[9:].strip()
+        elif desc.startswith('**[DEVELOPER MARKETING]**'):
+            vertical = "Developer Marketing"
+            desc = desc[25:].strip()
+        elif desc.startswith('**[TECHNICAL CONTENT MARKETING]**'):
+            vertical = "Technical Content Marketing"
+            desc = desc[33:].strip()
         else:
-            link_md = ""
+            vertical = "Software Engineering & Development"
             
-        content += f"| **{title}** | {desc} | {link_md} |\n"
+        link_md = f"[↗]({link})" if link else ""
+        verticals[vertical].append(f"| **{safe_title}** | {desc} | {link_md} |\n")
+        
+    # Generate the new README content
+    content = header
+    if not content.endswith('\n\n'):
+        content += '\n'
+        
+    # Generate tables for each vertical
+    for vertical_name in ["Software Engineering & Development", "GTM", "Developer Marketing", "Technical Content Marketing"]:
+        if verticals[vertical_name]:
+            content += f"### {vertical_name}\n\n"
+            content += "| Podcast Name | Description | Website Link |\n"
+            content += "| --- | --- | --- |\n"
+            for row in verticals[vertical_name]:
+                content += row
+            content += "\n"
         
     # Write back to README.md
     with open('README.md', 'w') as f:
-        f.write(content)
+        f.write(content.strip() + '\n')
         
-    print(f"README.md successfully updated with {len(podcasts)} total podcasts!")
+    print(f"README.md successfully updated with {len(podcasts)} total podcasts across {sum(1 for v in verticals.values() if v)} verticals!")
 
 if __name__ == "__main__":
     update_readme()
