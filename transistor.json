@@ -1,0 +1,92 @@
+[
+    {
+        "title": "How About Tomorrow?",
+        "description": "Adam and Dax discuss web technologies, the internet, and the future of (basically) everything.",
+        "link": "https://tomorrow.fm/"
+    },
+    {
+        "title": "Over Engineered",
+        "description": "A podcast where we explore unimportant programming questions (mostly PHP/Laravel/JavaScript) in extreme detail.",
+        "link": "https://overengineered.fm/"
+    },
+    {
+        "title": "Scaling DevTools",
+        "description": "Interviews with the people behind established DevTools like Algolia, SendGrid & AWS. As well as up-and-coming DevTool startups like Neptune.ai and AssemblyAI to find out how side projects become unicorns.",
+        "link": "https://podcast.scalingdevtools.com/"
+    },
+    {
+        "title": "No Compromises",
+        "description": "Two seasoned salty programming veterans talk about best practices based on years of working with Laravel SaaS teams.",
+        "link": "https://show.nocompromises.io/"
+    },
+    {
+        "title": "The Laravel Podcast",
+        "description": "The Laravel Podcast brings you Laravel and PHP development news and discussion. This season is hosted by Matt Stauffer and Taylor Otwell.",
+        "link": "https://laravelpodcast.com/"
+    },
+    {
+        "title": "The Scrimba Podcast",
+        "description": "Learn from inspiring developers about how they found meaningful and fulfilling work that also pays them well.",
+        "link": "https://scrimba.transistor.fm/"
+    },
+    {
+        "title": "Campfire Coders",
+        "description": "Sitting around an internet campfire, nerdin' out about web development (Laravel, PHP), keyboards, drums, drinks, and who knows what else!",
+        "link": "https://campfirecoders.com/"
+    },
+    {
+        "title": "Indie Rails",
+        "description": "Jeremy and Jess host a podcast where they delve into the journeys of indie developers dedicated to the Rails framework, exploring their entrepreneurial spirit and the businesses they've built. Catering to self-starters who value independence but may also enjoy collaboration, this podcast is for those who see Rails as an indispensable tool in their business ventures.",
+        "link": "https://www.indierails.com/"
+    },
+    {
+        "title": "Mostly Technical",
+        "description": "Hosted by Ian Landsman and Aaron Francis, Mostly Technical is a lively discussion on Laravel, business, and an eclectic mix of related topics.",
+        "link": "https://mostlytechnical.com/"
+    },
+    {
+        "title": "No Plans to Merge",
+        "description": "A comedy podcast masquerading as a show about programming.",
+        "link": "http://noplanstomerge.com/"
+    },
+    {
+        "title": "Syntax.fm",
+        "description": "A tasty treats podcast for web developers hosted by Wes Bos and Scott Tolinski.",
+        "link": "https://syntax.fm/"
+    },
+    {
+        "title": "North Meets South Web Podcast",
+        "description": "Jacob Bennett and Michael Dyrynda live on opposite sides of the world, but they don't let a 14.5-hour time difference stop them! In each episode, they share their journey of building their own software product.",
+        "link": "https://www.northmeetssouth.audio/"
+    },
+    {
+        "title": "FSJam Podcast",
+        "description": "Conversations about the emerging world of Fullstack Jamstack applications. Anthony Campolo and Christopher Burns explore the development practices of the frameworks, libraries, and services enabling this new paradigm.",
+        "link": "https://fsjam.org/"
+    },
+    {
+        "title": "The Technium",
+        "description": "The Technium is a weekly podcast discussing the edge of technology and what we can build with it. Each week,SriandWilintroduce a big idea in the future of computing and extrapolate the effect it will have on the world.Visit their website.",
+        "link": ""
+    },
+    {
+        "title": "Developers! - mer \u00e4n bara kod",
+        "description": "A podcast (in Swedish) by two female software developers: Madde and Sofia.",
+        "link": "https://www.developerspodcast.com/"
+    },
+    {
+        "title": "DevOps and Docker Talk",
+        "description": "Bret Fisher covers Docker and container tools like Kubernetes, Swarm, Cloud Native development, Cloud tech, DevOps, GitOps, DevSecOps, and the full software lifecycle supply chain.",
+        "link": "https://podcast.bretfisher.com/"
+    },
+    {
+        "title": "APIs You Won't Hate",
+        "description": "A no-nonsense podcast about API design & development, new features in the world of HTTP, service-orientated architecture, microservices, and probably bikes.",
+        "link": "https://apisyouwonthate.com/podcast/"
+    },
+    {
+        "title": "Evergreen podcasts",
+        "description": "These dev podcasts are great but are no longer publishing new episodes.",
+        "link": "https://aquestionofcode.com/"
+    }
+]
