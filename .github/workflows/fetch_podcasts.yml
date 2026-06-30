@@ -1,0 +1,65 @@
+name: Fetch Podcasts
+
+on:
+  schedule:
+    # Run automatically every day at midnight (UTC)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allow running the workflow manually from the GitHub Actions tab
+
+jobs:
+  fetch-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit any changes back to the repository
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Fetchers
+        run: |
+          echo "Starting fetchers..."
+          # Loop through all python files starting with "fetch_"
+          for fetcher in fetch_*.py; do
+            if [ -f "$fetcher" ]; then
+              echo "======================================"
+              echo "Running $fetcher"
+              echo "======================================"
+              python "$fetcher" || echo "::warning title=Fetcher Failed::Script $fetcher encountered an error, skipping to the next."
+            fi
+          done
+
+      - name: Update README
+        run: |
+          python update_readme.py
+          # Optional: Remove json files so they aren't committed to the repo
+          rm -f *.json
+
+      - name: Commit and Push Changes
+        run: |
+          # Set up git user for the commit
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add all changes (if any of your fetchers modify README.md or other files)
+          git add -A
+          
+          # Only commit and push if there are actual changes
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "docs: auto-update podcasts list"
+            git push
+          else
+            echo "No changes to commit. Everything is up to date!"
+          fi
