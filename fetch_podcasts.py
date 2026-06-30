@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 def fetch_podcasts():
     url = "https://transistor.fm/dev-podcasts/"
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -24,7 +24,7 @@ def fetch_podcasts():
                 if len(paragraphs) > 1:
                     a_tag = paragraphs[1].find('a')
                     if a_tag:
-                        link = a_tag['href']
+                        link = a_tag.get('href', '')
                         
                 podcasts.append({
                     'title': title,
