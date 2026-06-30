@@ -25,17 +25,25 @@ def update_readme():
     header = ""
     footer = ""
     try:
-        with open('README.md', 'r') as f:
+        with open('README.md', 'r', encoding='utf-8') as f:
             lines = f.readlines()
             table_start_idx = len(lines)
             footer_start_idx = len(lines)
             for i, line in enumerate(lines):
-                if line.startswith("| Podcast Name") or line.startswith("## Software Engineering") or line.startswith("### Software Engineering") or line.startswith("## GTM") or line.startswith("### GTM") or line.startswith("## Developer Marketing") or line.startswith("### Developer Marketing") or line.startswith("## Technical Content Marketing") or line.startswith("### Technical Content Marketing"):
+                if line.strip().startswith((
+                    "| Podcast Name",
+                    "## Software Engineering", "### Software Engineering",
+                    "## GTM", "### GTM",
+                    "## Developer Marketing", "### Developer Marketing",
+                    "## Technical Content Marketing", "### Technical Content Marketing"
+                )):
                     if table_start_idx == len(lines):
                         table_start_idx = i
-                if "<!-- FOOTER -->" in line or line.startswith("## About"):
+                if "<!-- FOOTER -->" in line or line.strip().startswith("## About"):
                     if footer_start_idx == len(lines):
                         footer_start_idx = i
+            if table_start_idx == len(lines) and footer_start_idx < len(lines):
+                table_start_idx = footer_start_idx
             header = "".join(lines[:table_start_idx])
             if footer_start_idx < len(lines):
                 footer = "".join(lines[footer_start_idx:])
@@ -76,9 +84,7 @@ def update_readme():
         verticals[vertical].append(f"| **{safe_title}** | {desc} | {link_md} |\n")
         
     # Generate the new README content
-    content = header
-    if not content.endswith('\n\n'):
-        content += '\n'
+    content = header.rstrip() + '\\n\\n'
         
     # Generate tables for each vertical
     for vertical_name in ["Software Engineering & Development", "GTM", "Developer Marketing", "Technical Content Marketing"]:
@@ -93,7 +99,7 @@ def update_readme():
     # Write back to README.md
     if footer:
         content += "\n" + footer
-    with open('README.md', 'w') as f:
+    with open('README.md', 'w', encoding='utf-8') as f:
         f.write(content.strip() + '\n')
         
     print(f"README.md successfully updated with {len(podcasts)} total podcasts across {sum(1 for v in verticals.values() if v)} verticals!")
