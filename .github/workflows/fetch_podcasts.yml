@@ -28,18 +28,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run Fetchers
-        run: |
-          echo "Starting fetchers..."
-          # Loop through all python files starting with "fetch_"
-          for fetcher in fetch_*.py; do
-            if [ -f "$fetcher" ]; then
-              echo "======================================"
-              echo "Running $fetcher"
-              echo "======================================"
-              python "$fetcher" || echo "::warning title=Fetcher Failed::Script $fetcher encountered an error, skipping to the next."
-            fi
-          done
+      - name: Fetch from Transistor
+        run: python transistor.py
+        continue-on-error: true
+
+      - name: Fetch from Feedspot
+        run: python feedspot.py
+        continue-on-error: true
 
       - name: Update README
         run: |
