@@ -1,5 +1,18 @@
-# Awesome Developer Podcasts
+<div align="center">
 
+  <h1>Developer Podcasts Directory</h1>
+
+  [![Awesome](https://awesome.re/badge.svg)](https://github.com/sindresorhus/awesome)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+  [![Maintained by Infrasity](https://img.shields.io/badge/maintained%20by-Infrasity-7B6BFF)](https://www.infrasity.com/)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/Infrasity-Labs/awersome-developer-conferences/blob/master/CONTRIBUTING.md)
+
+
+  <img src="assets/image.png" width="1000" alt="Awesome Tech Newsletters Banner" />
+
+</div>
+
+## What You'll Find Here
 A curated directory of the best podcasts for programmers, web developers, and software engineers.
 
 | Podcast Name | Description | Website Link |
@@ -84,3 +97,16 @@ A curated directory of the best podcasts for programmers, web developers, and so
 | **egghead.io developer chats** | We sit down with developers to talk about the latest and greatest in web development. These conversations will take you deeper into the human side of coding web applications and deliver insight that you might not expect. | [[↗]](https://podcasts.apple.com/kz/podcast/egghead-io-developer-chats/id1308497805) |
 | **no dogma podcast** | discussions on topics connected with software development; privacy, security, management, tools, techniques, skills, training, business, soft skills, health | [[↗]](https://nodogmapodcast.bryanhogan.net/) |
 | **Пятиминутка Python** | Короткий подкаст-дайджест о последних и не очень новостях в мире Python | [[↗]](https://podcasts.apple.com/us/podcast/%D0%BF%D1%8F%D1%82%D0%B8%D0%BC%D0%B8%D0%BD%D1%83%D1%82%D0%BA%D0%B0-python/id1492923694) |
+
+<!-- FOOTER -->
+## About
+
+Maintained by **[Infrasity](https://infrasity.com)**<br>A developer marketing agency helping DevTool startups and B2B SaaS companies with technical content, DevRel strategy, and GTM.
+
+We maintain this list because we research these events for our clients. If you're a DevRel or developer marketing team looking for conference strategy, [let's talk](https://infrasity.com).
+
+[infrasity.com](https://infrasity.com) · [LinkedIn](https://linkedin.com/company/infrasity) 
+
+---
+
+Missing an event? [Open a PR](CONTRIBUTING.md) or [file an issue](https://github.com/Infrasity-Labs/awersome-developer-conferences/issues/new).
