@@ -34,16 +34,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install codespell
-
-      - name: Check and Fix Spelling
-        run: codespell README.md --write-changes
 
       - name: Run Aggregator (Auto-Formats & Sorts README)
         run: |
           # The aggregator extracts existing podcasts from the README, 
           # sorts them alphabetically, fixes category names, and regenerates the tables.
           python fetchers/extract_existing.py || echo "No existing fetcher"
+          python checks/spell_check.py || echo "Spell check failed"
           python aggregate.py || echo "Aggregator failed"
 
       - name: Commit Auto-fixes
