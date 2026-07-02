@@ -57,6 +57,11 @@ def update_readme():
     for title in sorted(podcasts.keys()):
         p = podcasts[title]
         raw_desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
+        # Remove raw URLs, domain names, and leftover link fragments from description 
+        # to prevent ugly formatting and broken links in the table
+                raw_desc = re.sub(r'(?:https?://|www\.)[^\s<>"]+?(?=[.,?!;:)]*(?:\s|$))|\b\w+\.(?:com|io|org|net|co|se|fm)\b(?:/[^\s<>"]*?)?(?=[.,?!;:)]*(?:\s|$))|https\.\.\.', '', raw_desc, flags=re.IGNORECASE).strip()
+        # Clean up any leftover double spaces caused by the regex
+        raw_desc = re.sub(r'\s{2,}', ' ', raw_desc)
         safe_title = title.replace('|', '&#124;')
         link = (p.get('link') or '').strip()
         
