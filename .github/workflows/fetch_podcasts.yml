@@ -41,8 +41,7 @@ jobs:
 
       - name: Lint and Fix Spelling in Fetched Podcasts
         run: |
-          pip install codespell
-          codespell data/*.json --write-changes
+          python checks/spell_check.py
         continue-on-error: true
 
       - name: Aggregate and Update README
