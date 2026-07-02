@@ -29,23 +29,27 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           playwright install chromium
 
-      - name: Fetch from Transistor
-        run: python transistor.py
-        continue-on-error: true
+      - name: Create Data Directory
+        run: mkdir -p data
 
-      - name: Fetch from Feedspot
-        run: python feedspot.py
-        continue-on-error: true
-
-      - name: Fetch from PodcastIndex
-        run: python podcastindex.py
-        continue-on-error: true
-
-      - name: Update README
+      - name: Run Fetchers
         run: |
-          python update_readme.py
-          # Optional: Remove json files so they aren't committed to the repo
-          rm -f *.json
+          for script in fetchers/*.py; do
+            python "$script" || echo "Failed to run $script"
+          done
+        continue-on-error: true
+
+      - name: Lint and Fix Spelling in Fetched Podcasts
+        run: |
+          pip install codespell
+          codespell data/*.json --write-changes
+        continue-on-error: true
+
+      - name: Aggregate and Update README
+        run: |
+          python aggregate.py
+          # Optional: Clean up data directory so json files aren't committed
+          rm -rf data/*.json
 
       - name: Commit and Push Changes
         run: |
