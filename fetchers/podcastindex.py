@@ -61,7 +61,7 @@ def main():
         browser.close()
         
     # Write to podcastindex.json
-    with open("podcastindex.json", "w") as f:
+    with open('data/podcastindex.json', "w") as f:
         json.dump(all_podcasts, f, indent=4)
         
     print(f"Saved {len(all_podcasts)} podcasts to podcastindex.json")

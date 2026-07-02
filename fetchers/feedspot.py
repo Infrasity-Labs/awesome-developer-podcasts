@@ -46,6 +46,6 @@ def fetch_feedspot_podcasts():
 
 if __name__ == "__main__":
     podcasts = fetch_feedspot_podcasts()
-    with open('feedspot.json', 'w') as f:
+    with open('data/feedspot.json', 'w') as f:
         json.dump(podcasts, f, indent=4)
     print(f"Saved {len(podcasts)} podcasts to feedspot.json")
