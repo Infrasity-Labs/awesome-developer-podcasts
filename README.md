@@ -12,9 +12,7 @@
 
 </div>
 <h2>What You'll Find Here</h2>
-A curated directory of the best podcasts for programmers, web developers, and software engineers.
-
-### Software Engineering & Development
+A curated directory of the best podcasts for programmers, web developers, and software engineers.\n\n### Software Engineering & Development
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
