@@ -43,6 +43,8 @@ def extract():
                     "link": link
                 })
                 
+    import os
+    os.makedirs('data', exist_ok=True)
     with open('data/existing.json', 'w', encoding='utf-8') as f:
         json.dump(podcasts, f, indent=4)
     print(f"Extracted {len(podcasts)} existing podcasts into existing.json")

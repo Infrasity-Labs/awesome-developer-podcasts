@@ -74,7 +74,7 @@ def update_readme():
             desc = raw_desc
             
         # Word wrap the description to prevent horizontal scrolling
-        desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False))
+            desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False, break_on_hyphens=False))
             
         link_md = f"[↗]({link})" if link else ""
         verticals[vertical].append(f"| **{safe_title}** | {desc} | {link_md} |\n")

@@ -9,7 +9,7 @@ def fetch_syntax_episodes():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -47,6 +47,8 @@ def fetch_syntax_episodes():
 
 if __name__ == "__main__":
     episodes = fetch_syntax_episodes()
+    import os
+    os.makedirs('data', exist_ok=True)
     with open('data/syntax.json', 'w') as f:
         json.dump(episodes, f, indent=4)
     print(f"Saved {len(episodes)} episodes to syntax.json")

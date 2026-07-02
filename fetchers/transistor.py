@@ -37,6 +37,8 @@ def fetch_podcasts():
 
 if __name__ == "__main__":
     podcasts = fetch_podcasts()
+    import os
+    os.makedirs('data', exist_ok=True)
     with open('data/transistor.json', 'w') as f:
         json.dump(podcasts, f, indent=4)
     print(f"Saved {len(podcasts)} podcasts to transistor.json")

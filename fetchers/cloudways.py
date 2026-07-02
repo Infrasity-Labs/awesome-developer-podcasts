@@ -7,7 +7,7 @@ def fetch_cloudways_podcasts():
     # Use archive.org to bypass Cloudflare protection
     url = "http://web.archive.org/web/20230601000000/https://www.cloudways.com/blog/best-coding-podcasts/"
     
-    response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+    response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, "html.parser")
     
@@ -52,12 +52,12 @@ def fetch_cloudways_podcasts():
             h3_a_tag = element.find('a')
             if h3_a_tag:
                 href = h3_a_tag.get('href', '')
-                if href.startswith('http') and "web.archive.org" not in href:
-                    link = href
-                elif href.startswith('http') and "/web/" in href:
+                if "/web/" in href:
                     m = re.search(r'/web/\d+/(.*)', href)
                     if m:
                         link = m.group(1)
+                elif href.startswith('http'):
+                    link = href
             
             next_node = element.find_next_sibling()
             while next_node and next_node.name not in ['h2', 'h3']:
@@ -65,13 +65,12 @@ def fetch_cloudways_podcasts():
                     a_tag = next_node.find('a')
                     if a_tag and not link:
                         href = a_tag.get('href', '')
-                        if href.startswith('http') and "web.archive.org" not in href:
-                            link = href
-                        elif href.startswith('http') and "/web/" in href:
-                            # extract original url from archive.org url
+                        if "/web/" in href:
                             m = re.search(r'/web/\d+/(.*)', href)
                             if m:
                                 link = m.group(1)
+                        elif href.startswith('http'):
+                            link = href
                     desc_text += " " + next_node.get_text(strip=True)
                 next_node = next_node.find_next_sibling()
                 
@@ -94,6 +93,8 @@ def main():
         print(f"Failed to fetch or parse: {e}")
         podcasts = []
         
+    import os
+    os.makedirs('data', exist_ok=True)
     with open('data/cloudways.json', 'w') as f:
         json.dump(podcasts, f, indent=4)
         

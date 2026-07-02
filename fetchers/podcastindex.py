@@ -61,6 +61,8 @@ def main():
         browser.close()
         
     # Write to podcastindex.json
+    import os
+    os.makedirs('data', exist_ok=True)
     with open('data/podcastindex.json', "w") as f:
         json.dump(all_podcasts, f, indent=4)
         
