@@ -1,11 +1,14 @@
 import json
 import glob
+import textwrap
+import re
+from collections import defaultdict
 
 def update_readme():
     podcasts = {}
     
     # Read all JSON files produced by fetchers
-    for filepath in glob.glob("*.json"):
+    for filepath in glob.glob("data/*.json"):
         try:
             with open(filepath, 'r') as f:
                 data = json.load(f)
@@ -20,8 +23,7 @@ def update_readme():
         print("No podcasts found in JSON files.")
         return
         
-    # Preserve existing header
-        # Preserve existing header and footer
+    # Preserve existing header and footer
     header = ""
     footer = ""
     try:
@@ -30,15 +32,11 @@ def update_readme():
             table_start_idx = len(lines)
             footer_start_idx = len(lines)
             for i, line in enumerate(lines):
-                if line.strip().startswith((
-                    "| Podcast Name",
-                    "## Software Engineering", "### Software Engineering",
-                    "## GTM", "### GTM",
-                    "## Developer Marketing", "### Developer Marketing",
-                    "## Technical Content Marketing", "### Technical Content Marketing"
-                )):
+                # Stop header at the first category heading or table
+                if line.strip().startswith("### ") or line.strip().startswith("| Podcast Name"):
                     if table_start_idx == len(lines):
                         table_start_idx = i
+                # Start footer at the FOOTER comment or About heading
                 if "<!-- FOOTER -->" in line or line.strip().startswith("## About"):
                     if footer_start_idx == len(lines):
                         footer_start_idx = i
@@ -53,41 +51,45 @@ def update_readme():
     if not header.strip():
         header = "# Awesome Developer Podcasts\n\n"
         
-    # Group podcasts into verticals
-    verticals = {
-        "GTM": [],
-        "Developer Marketing": [],
-        "Technical Content Marketing": [],
-        "Software Engineering & Development": []
-    }
+    # Group podcasts into verticals dynamically
+    verticals = defaultdict(list)
     
     for title in sorted(podcasts.keys()):
         p = podcasts[title]
-        desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
+        raw_desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
         safe_title = title.replace('|', '&#124;')
         link = (p.get('link') or '').strip()
         
-        # Determine vertical
-        if desc.startswith('**[GTM]**'):
-            vertical = "GTM"
-            desc = desc[9:].strip()
-        elif desc.startswith('**[DEVELOPER MARKETING]**'):
-            vertical = "Developer Marketing"
-            desc = desc[25:].strip()
-        elif desc.startswith('**[TECHNICAL CONTENT MARKETING]**'):
-            vertical = "Technical Content Marketing"
-            desc = desc[33:].strip()
+        # Determine vertical dynamically
+        match = re.match(r'^\*\*\[(.*?)\]\*\*\s*(.*)', raw_desc, flags=re.IGNORECASE)
+        if match:
+            tag = match.group(1).strip()
+            if tag.upper() == "GTM":
+                vertical = "GTM"
+            else:
+                vertical = tag.title()
+            desc = match.group(2).strip()
         else:
             vertical = "Software Engineering & Development"
+            desc = raw_desc
+            
+        # Word wrap the description to prevent horizontal scrolling
+            desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False, break_on_hyphens=False))
             
         link_md = f"[↗]({link})" if link else ""
         verticals[vertical].append(f"| **{safe_title}** | {desc} | {link_md} |\n")
         
     # Generate the new README content
-    content = header.rstrip() + '\\n\\n'
+    content = header.rstrip() + '\n\n'
         
     # Generate tables for each vertical
-    for vertical_name in ["Software Engineering & Development", "GTM", "Developer Marketing", "Technical Content Marketing"]:
+    sorted_verticals = sorted(verticals.keys())
+    # Ensure Software Engineering is always first
+    if "Software Engineering & Development" in sorted_verticals:
+        sorted_verticals.remove("Software Engineering & Development")
+        sorted_verticals.insert(0, "Software Engineering & Development")
+        
+    for vertical_name in sorted_verticals:
         if verticals[vertical_name]:
             content += f"### {vertical_name}\n\n"
             content += "| Podcast Name | Description | Website Link |\n"
@@ -102,7 +104,7 @@ def update_readme():
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(content.strip() + '\n')
         
-    print(f"README.md successfully updated with {len(podcasts)} total podcasts across {sum(1 for v in verticals.values() if v)} verticals!")
+    print(f"README.md successfully updated with {len(podcasts)} total podcasts across {len(verticals)} verticals!")
 
 if __name__ == "__main__":
     update_readme()
