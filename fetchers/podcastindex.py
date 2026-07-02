@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
 # Keywords to ensure the podcasts are actually developer or tech-related
-DEV_KEYWORDS = ["developer", "software", "programming", "engineer", "code", "tech", "dev", "devrel", "saas", "developer marketing", "b2b", "gtm", "technical content marketing"]
+DEV_KEYWORDS = ["developer", "software", "programming", "engineer", "code", "tech", "dev", "devrel", "saas", "developer marketing", "b2b", "gtm", "technical content marketing", "developer", "software", "programming", "engineer", "code", "tech", "dev", "devrel", "saas", "developer marketing", "b2b", "gtm", "technical content marketing", "ops", "devops", "sre", "kubernetes", "docker", "infrastructure", "cloud", "aws", "azure", "gcp", "ai", "machine learning", "artificial intelligence", "data science", "neural", "security", "cybersecurity", "infosec", "hacking", "kotlin", "golang", "rust", "swift", "java", "python", "javascript", "js", "html", "css", "mobile", "ios", "android", "backend", "frontend", "web", "database", "systems"]
 
 def scrape_podcasts(page, query, category):
     results = []
@@ -49,7 +49,7 @@ def scrape_podcasts(page, query, category):
 
 def main():
     search_map = {
-        "Software Engineering & General Tech": ["software engineering", "programming", "coding", "software architecture"],
+        "Software Engineering & Development": ["software engineering", "programming", "coding", "software architecture"],
         "Web Development": ["web development", "frontend", "reactjs", "javascript developer", "html css"],
         "Backend & Systems": ["backend developer", "distributed systems", "microservices"],
         "Programming Languages": ["python programming", "golang", "rust programming", "java developer", "c++ programming"],
