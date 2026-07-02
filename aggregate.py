@@ -32,8 +32,8 @@ def update_readme():
             table_start_idx = len(lines)
             footer_start_idx = len(lines)
             for i, line in enumerate(lines):
-                # Stop header at the first category heading or table
-                if line.strip().startswith("### ") or line.strip().startswith("| Podcast Name"):
+                # Stop header at the first category heading, table, or TOC
+                if line.strip().startswith("### ") or line.strip().startswith("## Table of Contents") or line.strip().startswith("| Podcast Name"):
                     if table_start_idx == len(lines):
                         table_start_idx = i
                 # Start footer at the FOOTER comment or About heading
@@ -59,7 +59,7 @@ def update_readme():
         raw_desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
         # Remove raw URLs, domain names, and leftover link fragments from description 
         # to prevent ugly formatting and broken links in the table
-                raw_desc = re.sub(r'(?:https?://|www\.)[^\s<>"]+?(?=[.,?!;:)]*(?:\s|$))|\b\w+\.(?:com|io|org|net|co|se|fm)\b(?:/[^\s<>"]*?)?(?=[.,?!;:)]*(?:\s|$))|https\.\.\.', '', raw_desc, flags=re.IGNORECASE).strip()
+        raw_desc = re.sub(r'https?://[^\s<>"]+|www\.[^\s<>"]+|\b\w+\.(?:com|io|org|net|co|se|fm)\b/?\S*|https\.\.\.', '', raw_desc, flags=re.IGNORECASE).strip()
         # Clean up any leftover double spaces caused by the regex
         raw_desc = re.sub(r'\s{2,}', ' ', raw_desc)
         safe_title = title.replace('|', '&#124;')
@@ -79,7 +79,7 @@ def update_readme():
             desc = raw_desc
             
         # Word wrap the description to prevent horizontal scrolling
-            desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False, break_on_hyphens=False))
+        desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False, break_on_hyphens=False))
             
         link_md = f"[↗]({link})" if link else ""
         verticals[vertical].append(f"| **{safe_title}** | {desc} | {link_md} |\n")
@@ -93,6 +93,18 @@ def update_readme():
     if "Software Engineering & Development" in sorted_verticals:
         sorted_verticals.remove("Software Engineering & Development")
         sorted_verticals.insert(0, "Software Engineering & Development")
+    elif "Software Engineering & General Tech" in sorted_verticals:
+        sorted_verticals.remove("Software Engineering & General Tech")
+        sorted_verticals.insert(0, "Software Engineering & General Tech")
+        
+    # Generate Table of Contents
+    content += "## Table of Contents\n"
+    for vertical_name in sorted_verticals:
+        if verticals[vertical_name]:
+            # Create GitHub-compatible anchor link
+            anchor = re.sub(r'[^\w\- ]', '', vertical_name.lower()).replace(' ', '-')
+            content += f"- [{vertical_name}](#{anchor})\n"
+    content += "\n"
         
     for vertical_name in sorted_verticals:
         if verticals[vertical_name]:
