@@ -71,6 +71,8 @@ def update_readme():
             tag = match.group(1).strip()
             if tag.upper() == "GTM":
                 vertical = "GTM"
+            elif tag.lower() in ("software engineering & general tech", "software engineering and general tech"):
+                vertical = "Software Engineering & Development"
             else:
                 vertical = tag.title()
             desc = match.group(2).strip()
@@ -93,9 +95,7 @@ def update_readme():
     if "Software Engineering & Development" in sorted_verticals:
         sorted_verticals.remove("Software Engineering & Development")
         sorted_verticals.insert(0, "Software Engineering & Development")
-    elif "Software Engineering & General Tech" in sorted_verticals:
-        sorted_verticals.remove("Software Engineering & General Tech")
-        sorted_verticals.insert(0, "Software Engineering & General Tech")
+
         
     # Generate Table of Contents
     content += "## Table of Contents\n"
