@@ -71,6 +71,8 @@ def update_readme():
             tag = match.group(1).strip()
             if tag.upper() == "GTM":
                 vertical = "GTM"
+            elif tag.title() == "Software Engineering & General Tech" or tag.title() == "Software Engineering And General Tech":
+                vertical = "Software Engineering & Development"
             else:
                 vertical = tag.title()
             desc = match.group(2).strip()
