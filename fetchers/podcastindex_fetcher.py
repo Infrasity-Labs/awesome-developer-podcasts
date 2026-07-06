@@ -9,7 +9,7 @@ def scrape_podcasts(index, query, category):
     results = []
     try:
         response = index.search(query)
-        if response and response.get("status") == "true":
+        if response and response.get("status") is True:
             feeds = response.get("feeds", [])
             for feed in feeds:
                 title = feed.get("title", "")
@@ -43,7 +43,7 @@ def main():
     if not api_key or not api_secret:
         print("ERROR: PODCASTINDEX_API_KEY or PODCASTINDEX_API_SECRET environment variables are missing.")
         print("Please sign up at https://api.podcastindex.org/ to get your keys.")
-        exit(1)
+        return
         
     config = {
         "api_key": api_key,
