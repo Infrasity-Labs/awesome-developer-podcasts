@@ -28,12 +28,14 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install codespell
-          playwright install --with-deps chromium
 
       - name: Create Data Directory
         run: mkdir -p data
 
       - name: Run Fetchers
+        env:
+          PODCASTINDEX_API_KEY: ${{ secrets.PODCASTINDEX_API_KEY }}
+          PODCASTINDEX_API_SECRET: ${{ secrets.PODCASTINDEX_API_SECRET }}
         run: |
           for script in fetchers/*.py; do
             python "$script" || echo "Failed to run $script"

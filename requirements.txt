@@ -1,5 +1,4 @@
 requests==2.31.0
 beautifulsoup4==4.12.3
-playwright==1.60.0
-langdetect
-pyspellchecker
+python-podcastindex
+codespell
