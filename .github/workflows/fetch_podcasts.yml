@@ -8,11 +8,21 @@ on:
     # Allow running the workflow manually from the GitHub Actions tab
 
 jobs:
-  fetch-and-update:
+  fetch:
+    name: Fetch (${{ matrix.fetcher }})
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Needed to commit any changes back to the repository
-
+    strategy:
+      fail-fast: false # Don't cancel other fetchers if one fails
+      matrix:
+        fetcher: 
+          - cloudways
+          - extract_existing
+          - feedspot
+          - podcastindex_fetcher
+          - spotify_fetcher
+          - syntax
+          - transistor
+          
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,46 +37,68 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install codespell
 
-      - name: Create Data Directory
-        run: mkdir -p data
-
-      - name: Run Fetchers
+      - name: Run Fetcher Script
         env:
           PODCASTINDEX_API_KEY: ${{ secrets.PODCASTINDEX_API_KEY }}
           PODCASTINDEX_API_SECRET: ${{ secrets.PODCASTINDEX_API_SECRET }}
-        
         run: |
-          for script in fetchers/*.py; do
-            python "$script" &
-          done
+          mkdir -p data
+          python "fetchers/${{ matrix.fetcher }}.py"
           
-          # Wait for all background fetcher jobs to finish before proceeding
-          wait
-        continue-on-error: true
+      - name: Upload JSON Data
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-${{ matrix.fetcher }}
+          path: data/*.json
+          if-no-files-found: ignore
+          retention-days: 1
 
-      - name: Lint and Fix Spelling in Fetched Podcasts
+  aggregate:
+    name: Aggregate & Commit
+    needs: fetch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
         run: |
-          codespell data/*.json --write-changes || true
+          python -m pip install --upgrade pip
+          pip install codespell
+
+      - name: Download all JSON Data
+        uses: actions/download-artifact@v4
+        with:
+          path: data-artifacts
+
+      - name: Consolidate Data
+        run: |
+          mkdir -p data
+          # Download artifact creates subfolders, so we move all json files into data/
+          find data-artifacts -name "*.json" -exec cp {} data/ \;
+          ls -la data/
+
+      - name: Lint and Fix Spelling
+        run: codespell data/*.json --write-changes || true
         continue-on-error: true
 
       - name: Aggregate and Update README
-        run: |
-          python aggregate.py
-          # Optional: Clean up data directory so json files aren't committed
-          rm -rf data/*.json
+        run: python aggregate.py
 
       - name: Commit and Push Changes
         run: |
-          # Set up git user for the commit
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Add all changes (if any of your fetchers modify README.md or other files)
-          git add -A
-          
-          # Only commit and push if there are actual changes
+          git add README.md
           if ! git diff-index --quiet HEAD; then
             git commit -m "docs: auto-update podcasts list"
             git push
