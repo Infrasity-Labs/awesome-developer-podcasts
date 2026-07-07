@@ -19,7 +19,6 @@ jobs:
           - extract_existing
           - feedspot
           - podcastindex_fetcher
-          - spotify_fetcher
           - syntax
           - transistor
           
