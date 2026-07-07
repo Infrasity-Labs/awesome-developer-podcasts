@@ -36,10 +36,14 @@ jobs:
         env:
           PODCASTINDEX_API_KEY: ${{ secrets.PODCASTINDEX_API_KEY }}
           PODCASTINDEX_API_SECRET: ${{ secrets.PODCASTINDEX_API_SECRET }}
+        
         run: |
           for script in fetchers/*.py; do
-            python "$script" || echo "Failed to run $script"
+            python "$script" &
           done
+          
+          # Wait for all background fetcher jobs to finish before proceeding
+          wait
         continue-on-error: true
 
       - name: Lint and Fix Spelling in Fetched Podcasts
