@@ -15,10 +15,12 @@ jobs:
       fail-fast: false # Don't cancel other fetchers if one fails
       matrix:
         fetcher: 
+          - apple_podcasts
           - cloudways
           - extract_existing
           - feedspot
           - podcastindex_fetcher
+          - spotify
           - syntax
           - transistor
           
@@ -41,6 +43,8 @@ jobs:
         env:
           PODCASTINDEX_API_KEY: ${{ secrets.PODCASTINDEX_API_KEY }}
           PODCASTINDEX_API_SECRET: ${{ secrets.PODCASTINDEX_API_SECRET }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         run: |
           mkdir -p data
           python "fetchers/${{ matrix.fetcher }}.py"
