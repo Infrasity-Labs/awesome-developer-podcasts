@@ -18,11 +18,12 @@ def scrape_apple_podcasts(query, category):
     }
     
     try:
-        response = requests.get(search_url, params=params)
+        response = requests.get(search_url, params=params, timeout=10)
         if response.status_code == 200:
             data = response.json()
             shows = data.get("results", [])
             filtered_out = 0
+            valid_keywords = DEV_KEYWORDS + [query.lower()]
             
             for show in shows:
                 title = show.get("collectionName") or ""
@@ -37,7 +38,6 @@ def scrape_apple_podcasts(query, category):
                 extra_lower = (artist + " " + genres).lower()
                 
                 matched = False
-                valid_keywords = DEV_KEYWORDS + [query.lower()]
                 for kw in valid_keywords:
                     if kw in title_lower or kw in extra_lower:
                         matched = True
@@ -91,7 +91,7 @@ def main():
             
     # Write to apple_podcasts.json
     os.makedirs('data', exist_ok=True)
-    with open('data/apple_podcasts.json', "w") as f:
+    with open('data/apple_podcasts.json', "w", encoding="utf-8") as f:
         json.dump(all_podcasts, f, indent=4)
         
     print(f"Saved {len(all_podcasts)} podcasts to apple_podcasts.json")

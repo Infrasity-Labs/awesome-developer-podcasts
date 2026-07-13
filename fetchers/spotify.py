@@ -17,7 +17,7 @@ def get_spotify_token(client_id, client_secret):
         "grant_type": "client_credentials",
         "client_id": client_id,
         "client_secret": client_secret
-    })
+    }, timeout=10)
     
     if response.status_code != 200:
         print(f"Error fetching Spotify token: {response.status_code} - {response.text}")
@@ -45,7 +45,7 @@ def scrape_spotify_podcasts(token, query, category):
         }
         
         try:
-            response = requests.get(search_url, headers=headers, params=params)
+            response = requests.get(search_url, headers=headers, params=params, timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 shows = data.get("shows", {}).get("items", [])
@@ -60,6 +60,7 @@ def scrape_spotify_podcasts(token, query, category):
             break
             
     filtered_out = 0
+    valid_keywords = DEV_KEYWORDS + [query.lower()]
     for show in all_shows:
         if not show:
             continue
@@ -73,7 +74,6 @@ def scrape_spotify_podcasts(token, query, category):
         desc_lower = description.lower()
         
         matched = False
-        valid_keywords = DEV_KEYWORDS + [query.lower()]
         for kw in valid_keywords:
             if kw in title_lower or kw in desc_lower:
                 matched = True
@@ -132,7 +132,7 @@ def main():
             
     # Write to spotify.json
     os.makedirs('data', exist_ok=True)
-    with open('data/spotify.json', "w") as f:
+    with open('data/spotify.json', "w", encoding="utf-8") as f:
         json.dump(all_podcasts, f, indent=4)
         
     print(f"Saved {len(all_podcasts)} podcasts to spotify.json")
