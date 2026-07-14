@@ -34,7 +34,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Software Engineering & Development
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (446)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -490,7 +490,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Backend & Systems
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (102)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -602,7 +602,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Cloud Computing
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (211)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -823,7 +823,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Developer Marketing
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (233)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1066,7 +1066,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Devops & Infrastructure
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (309)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1385,7 +1385,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### GTM
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (146)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1541,7 +1541,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Machine Learning & Ai
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (355)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1906,7 +1906,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Mobile Development
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (194)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2110,7 +2110,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Programming Languages
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (157)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2277,7 +2277,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Security & Privacy
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (240)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2527,7 +2527,7 @@ A community-curated directory of top podcasts for software engineers, developer 
 ### Web Development
 
 <details>
-<summary>View Podcasts</summary>
+<summary>View Podcasts (259)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
