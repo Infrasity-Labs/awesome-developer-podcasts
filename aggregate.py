@@ -109,11 +109,12 @@ def update_readme():
     for vertical_name in sorted_verticals:
         if verticals[vertical_name]:
             content += f"### {vertical_name}\n\n"
+            content += "<details>\n<summary>View Podcasts</summary>\n\n"
             content += "| Podcast Name | Description | Website Link |\n"
             content += "| --- | --- | --- |\n"
             for row in verticals[vertical_name]:
                 content += row
-            content += "\n"
+            content += "\n</details>\n\n"
         
     # Write back to README.md
     if footer:
