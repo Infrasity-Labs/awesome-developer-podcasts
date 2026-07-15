@@ -74,18 +74,8 @@ def main():
         print("Please sign up at https://www.listennotes.com/api/ to get your key.")
         return
 
-    # Load existing podcasts to aggregate over time.
     filepath = 'data/listennotes.json'
     podcast_map = {}
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                for p in json.load(f):
-                    title = p.get("title")
-                    if title:
-                        podcast_map[title] = p
-        except Exception as e:
-            print(f"Warning: Could not load existing podcasts: {e}")
 
     search_map = {
         "Software Engineering & Development": ["software engineering", "programming", "coding", "software architecture"],
