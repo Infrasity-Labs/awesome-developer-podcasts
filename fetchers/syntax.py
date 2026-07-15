@@ -1,7 +1,7 @@
-import requests
 from bs4 import BeautifulSoup
 import json
 import urllib.parse
+from retry import get_with_backoff
 
 def fetch_syntax_episodes():
     url = "https://syntax.fm"
@@ -9,7 +9,7 @@ def fetch_syntax_episodes():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
-    response = requests.get(url, headers=headers, timeout=10)
+    response = get_with_backoff(url, headers=headers, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -20,7 +20,7 @@ def fetch_syntax_episodes():
         page_url = f"{url}/shows?page={page}"
         print(f"Fetching {page_url}...")
         
-        response = requests.get(page_url, headers=headers, timeout=10)
+        response = get_with_backoff(page_url, headers=headers, timeout=10)
         if response.status_code != 200:
             break
             

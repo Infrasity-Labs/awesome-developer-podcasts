@@ -1,7 +1,7 @@
 import json
 import os
-import requests
 import time
+from retry import get_with_backoff
 
 # Keywords to ensure the podcasts are actually developer or tech-related
 DEV_KEYWORDS = ["developer", "software", "programming", "engineer", "code", "tech", "dev", "devrel", "saas", "developer marketing", "b2b", "gtm", "technical content marketing", "ops", "devops", "sre", "kubernetes", "docker", "infrastructure", "cloud", "aws", "azure", "gcp", "ai", "machine learning", "artificial intelligence", "data science", "neural", "security", "cybersecurity", "infosec", "hacking", "kotlin", "golang", "rust", "swift", "java", "python", "javascript", "js", "html", "css", "mobile", "ios", "android", "backend", "frontend", "web", "database", "systems"]
@@ -18,7 +18,7 @@ def scrape_apple_podcasts(query, category):
     }
     
     try:
-        response = requests.get(search_url, params=params, timeout=10)
+        response = get_with_backoff(search_url, params=params, timeout=10)
         if response.status_code == 200:
             data = response.json()
             shows = data.get("results", [])
