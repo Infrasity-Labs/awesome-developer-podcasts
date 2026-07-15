@@ -7,8 +7,10 @@ try:
 except ImportError:
     pass  
 
-# Keywords to ensure the podcasts are actually developer or tech-related
-from config import DEV_KEYWORDS
+try:
+    from fetchers.config import DEV_KEYWORDS
+except ModuleNotFoundError:
+    from config import DEV_KEYWORDS
 
 def scrape_podcasts(index, query, category):
     results = []

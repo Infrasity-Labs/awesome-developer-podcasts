@@ -3,8 +3,10 @@ import os
 import requests
 import time
 
-# Keywords to ensure the podcasts are actually developer or tech-related
-from config import DEV_KEYWORDS
+try:
+    from fetchers.config import DEV_KEYWORDS
+except ModuleNotFoundError:
+    from config import DEV_KEYWORDS
 
 def scrape_apple_podcasts(query, category):
     results = []

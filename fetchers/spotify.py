@@ -8,8 +8,10 @@ try:
 except ImportError:
     pass
 
-# Keywords to ensure the podcasts are actually developer or tech-related
-from config import DEV_KEYWORDS
+try:
+    from fetchers.config import DEV_KEYWORDS
+except ModuleNotFoundError:
+    from config import DEV_KEYWORDS
 
 def get_spotify_token(client_id, client_secret):
     auth_url = "https://accounts.spotify.com/api/token"
