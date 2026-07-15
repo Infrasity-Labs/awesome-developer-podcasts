@@ -14,6 +14,10 @@
 <h2>What You'll Find Here</h2>
 A community-curated directory of top podcasts for software engineers, developer advocates, and tech founders. Whether you are improving enterprise architecture, checking out the latest frameworks, or seeking proven strategies in B2B SaaS and developer marketing, this collection links you to expert-led discussions throughout the product ecosystem.
 
+---
+  
+  > **Notice:** Due to the massive number of podcasts in this directory, GitHub's web interface may truncate the bottom of this page. To view the complete list, please **[view the Raw file here](https://raw.githubusercontent.com/Infrasity-Labs/awesome-developer-podcasts/main/README.md)** or **clone the repository** to your local machine.
+
 ## Table of Contents
 - [Software Engineering & Development](#software-engineering--development)
 - [Backend & Systems](#backend--systems)
@@ -28,6 +32,9 @@ A community-curated directory of top podcasts for software engineers, developer 
 - [Web Development](#web-development)
 
 ### Software Engineering & Development
+
+<details>
+<summary>View Podcasts (446)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -484,7 +491,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **☁️AWS Cloud Practitioner Essentials** | Ready to jumpstart your career in the cloud? In "AWS Cloud Practitioner<br>Essentials," We cover everything from core infrastructure to security and<br>billing. Perfect for beginners, non-technical professionals, and aspiring<br>architects. 🎯 Ready to test your knowledge? Practice with our free certification<br>quiz app on android Certquest or at | [↗](https://open.spotify.com/show/68htxokT392uDDDkMQV4pp) |
 | **🎓 Learn Medical Coding Anytime, Anywhere Online with High-Quality Course Material—ICD 10 CPT HCPCS** | About Instructor ✍️ Author: Pradeep Kumar CPC, is a highly experienced medical<br>coding professional with over 13 years of expertise in the field. Connect with<br>Us 📱 &#124; Follow our social media pages -Launchpad Legends 🔥Switch Medical<br>coding specialties without switching jobs easily in 30 days. 🩺 Foundation<br>"Master medical terminology, anatomy, physiology, and pathophysiology — the<br>building blocks of accurate coding." 💻 Coding Systems: "Excel in ICD-10-CM for<br>diagnoses, CPT for procedures, HCPCS for supplies, and ICD-10-PCS for Inpatient<br>coding | [↗](https://open.spotify.com/show/4pPfYVXEQYOfJUzAWpKQc0) |
 
+</details>
+
 ### Backend & Systems
+
+<details>
+<summary>View Podcasts (102)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -592,7 +604,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **Wherever It Leads...** | Wherever It Leads… dives deeper into marvelous locations around the world to<br>expose the truth about the best each has to offer while attempting to understand<br>the underlying challenges each faces. Learn more about the show: Often through<br>themes specific to each destination, this new kind of travel show presents<br>recommendations on major attractions and cuisine while exploring how<br>destinations are affected by government systems, crime issues, workforce<br>shortages, and sometimes even highlighting when the tourists themselves are the<br>problem. Luna Shark is proud to welcome travelers, locals and journalists alike<br>to get a better understanding of how visitors can make the most positive impact<br>while staying. Each episode starts with background information, history of the<br>place and any notable landmarks before we dive deeper... uncovering a better<br>understanding of why guests love where they live or visit, what visitors should<br>put on their must-do lists, any special language advice, and any tips to make a<br>stay more enjoyable or suggestions to create a positive impact before departing.<br>On Wherever It Leads… , Matney, Moses and a team of Journalists like Grace<br>Hills, Sam Berlin, and other LUNASHARK contributors navigate conversations with<br>local residents, tourism professionals and reporters who reveal what travel<br>guidebooks can’t—the truth about how visitors can explore responsibly and<br>contribute to leaving a positive mark on the places they visit. Wherever It<br>Leads..., True Sunlight, Cup of Justice, Murdaugh Murders Podcast are<br>distributed by the fwd. Network and the Murdaugh: Death in the Family Official<br>Podcast is distributed as video podcasts on Hulu and Hulu on Disney+. All are<br>available wherever folks listen to podcasts. LUNASHARK is an industry-leading<br>independent digital media company focused on producing high-quality audio and<br>video content that makes the world a better place. Founded in 2021, the growing<br>audio, video and membership platforms at Luna Shark have reached over 25 million<br>viewers, listeners and members globally. Founders Mandy Matney and David<br>Moses believe that our systems of justice are sacred, but not infallible. Our<br>mission is to expose the truth wherever it leads, give voice to victims and get<br>the story straight. @whereveritleadspod | [↗](https://open.spotify.com/show/6TcG9YzgQnGmehbKbBt1Mp) |
 | **a16z crypto show** | The a16z crypto show explores how decentralized networks are reshaping money,<br>ownership, and the architecture of the internet. We go beyond the hype to look<br>at what’s actually working, what isn’t, and what comes next as crypto continues<br>to go mainstream and blockchains become core infrastructure. Each episode<br>features conversations with founders, engineers, economists, policymakers, and<br>researchers building at the frontier of finance, payments, AI, and distributed<br>systems. We cover stablecoins and global payments, the tokenization of<br>"real-world" assets, decentralized physical infrastructure, network design and<br>governance, and the practical tradeoffs behind decentralization — along with<br>lessons from past technology shifts. Produced and hosted by the a16z crypto<br>team, the show combines reporting, analysis, and first-principles thinking to<br>explain how crypto intersects with the economy and society — and why it matters<br>now. Learn more at *** Posts should not be considered investment advice or an<br>advertisement for investment services. Reposts of third-party content are not<br>attributable to a16z; see disclosures for more information: | [↗](https://open.spotify.com/show/7pMZvsNXEnb0CYcPiDQywE) |
 
+</details>
+
 ### Cloud Computing
+
+<details>
+<summary>View Podcasts (211)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -813,7 +830,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **¿Qué es la nube? Conociendo AWS, Google Cloud y Microsoft Azure** | Vamos a sumergirnos en el mundo del cloud computing, o computación en la nube, y<br>exploraremos tres de las principales plataformas que dominan este mercado:<br>Amazon Web Services (AWS), Google Cloud Platform (GCP) y Microsoft Azure. | [↗](https://open.spotify.com/show/3WqvHpqYAVJWAlho9ZvRnU) |
 | **🎙️ Cosas de programadores &#124; Podcast Desarrollo de Software &#124; campusMVP.es** | Podcast by campusMVP.es. Genres: Technology, Podcasts | [↗](https://podcasts.apple.com/us/podcast/cosas-de-programadores-podcast-desarrollo-de/id1594359705?uo=4) |
 
+</details>
+
 ### Developer Marketing
+
+<details>
+<summary>View Podcasts (233)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1053,7 +1075,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **Кошелёк или жизнь** | Привет! Вы слушаете подкаст «Кошелёк или жизнь» — открытые и искренние беседы с<br>теми и для тех, кому интересен взгляд изнутри на развитие российской IT-отрасли.<br>Мы его ведущие — DevRel Таня и инженер Алексей.Мы убеждены, что в Кошельке и<br>множестве других российских IT компаний работают очень заряженные люди, которые<br>каждый день создают качественные продукты. А ещё все мы постоянно обсуждаем то,<br>как мы можем делать свою работу лучше, и вместе наполняем её новыми смыслами.<br>Наш подкаст как раз про это: работу, ценности и жизнь в IT-отрасли. Что значит<br>быть хорошим тимлидом? Как работать с позиционированием продукта и менять его<br>образ в глазах пользователя? Что есть успех в IT, и как его добиться?Каждый<br>месяц вместе с коллегами мы будем искать ответы на эти и многие другие вопросы,<br>чтобы глубже понять сферу, в которой мы трудимся.Слушайте нас любой<br>подкаст-площадке, а еще скачивайте приложение «Кошелёк», чтобы хранить все<br>дисконтные карты у себя в смартфоне и избавляться от ненужного<br>пластика!Telegram-канал подкаста: Узнать про нашу команду: Instagram*: Блог на<br>Хабре: Блог на VC: — продукт компании Meta Platforms Inc., признана<br>экстремистской организацией на территории Российской Федерации | [↗](https://open.spotify.com/show/0HvTsZIfHUmDsR5tjmTMWr) |
 | **アノニマスですけど何か** | ドイツでフリーランスのフロントエンドエンジニアを4年経験したのち、2021年6月から次世代Headless CMSのStoryblokでDevRel<br>Engineerとして活動しています。テック、DevRel、プログラミング教育、コミュニティに関することを発信していきます。アノ何は日本語の個人収録Podcast。<br>英語版Podcastもしています。 | [↗](https://open.spotify.com/show/1VUEHqY3885ToC3uKU5CkP) |
 
+</details>
+
 ### Devops & Infrastructure
+
+<details>
+<summary>View Podcasts (309)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1371,7 +1398,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **☁️Cloud Engineer Bootcamp** | Master your DevOps certifications with zero fluff. Whether you're tackling the<br>AWS Certified DevOps Engineer, the CKA/CKAD/CKS, or mastering Git workflows,<br>this show is your ultimate study guide. We break down complex exam domains into<br>clear, actionable insights to help you pass on your first attempt. 🎯 Ready to<br>test your knowledge? Practice with our free certification quiz app on android<br>Certquest or at | [↗](https://open.spotify.com/show/45BtlX4PaRi1RH4EK3m3Hy) |
 | **🌐Kubernetes : Cloud Native Career KCNA Certification** | The KCNA is about more than just Kubernetes; it's about the entire CNCF<br>Landscape! Nat and Leo explore the crucial surrounding tools and concepts tested<br>on the exam, including Observability (Prometheus, Grafana), Package Management<br>(Helm), and Cloud Native Security best practices. We cover how these open-source<br>projects fit together to deliver modern applications. A broader perspective for<br>a holistic understanding of the Cloud Native space. 🎯 Ready to test your<br>knowledge? Practice with our free certification quiz app on android Certquest or<br>at | [↗](https://open.spotify.com/show/1h7XygOS2eeaSrnVn9iGfN) |
 
+</details>
+
 ### GTM
+
+<details>
+<summary>View Podcasts (146)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1523,7 +1555,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **the gtm engineer** | We share the hidden stories, mental models, and tactics defining the rise of the<br>GTM Engineer. | [↗](https://open.spotify.com/show/7BAgQ6MdoQVeI11VJxzqSn) |
 | **پادکست GTM، پادکستی از جنس مارکتینگ** | Podcast by gtm podcast. Genres: Business, Podcasts | [↗](https://podcasts.apple.com/us/podcast/%D9%BE%D8%A7%D8%AF%DA%A9%D8%B3%D8%AA-gtm-%D9%BE%D8%A7%D8%AF%DA%A9%D8%B3%D8%AA%DB%8C-%D8%A7%D8%B2-%D8%AC%D9%86%D8%B3-%D9%85%D8%A7%D8%B1%DA%A9%D8%AA%DB%8C%D9%86%DA%AF/id1633238746?uo=4) |
 
+</details>
+
 ### Machine Learning & Ai
+
+<details>
+<summary>View Podcasts (355)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -1884,7 +1921,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **Проветримся!** | Podcast by Ivan Yamshchikov. Genres: Technology, Podcasts, Science | [↗](https://podcasts.apple.com/us/podcast/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%82%D1%80%D0%B8%D0%BC%D1%81%D1%8F/id1445172568?uo=4) |
 | **“The Neural Journey” – An exploration of AI concepts for the curious** | Explore the fascinating world of Artificial Intelligence, where big ideas meet<br>clear explanations. From the fundamentals of machine learning and neural<br>networks to advanced deep learning models like CNNs, RNNs, and generative AI,<br>this podcast unpacks the tech shaping our future. Discover real-world<br>applications, optimization tricks, and tools like TensorFlow and PyTorch.<br>Whether you’re new to AI or an expert looking for fresh insights, join us on a<br>journey to decode intelligence—one concept, one model, and one story at a time. | [↗](https://open.spotify.com/show/6zzGBgrdSYDmE5Q2UIAZtB) |
 
+</details>
+
 ### Mobile Development
+
+<details>
+<summary>View Podcasts (194)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2085,7 +2127,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **方君宇** | 大家好，我是方君宇，一名专注于 Apple 生态的独立开发者。 过去，我从事项目驻场工作，2024<br>年中旬从济南离职后，开始转向餐饮行业，同时利用空闲时间系统学习 Swift。2025 年，我正式投身于 Swift<br>独立应用开发。在学习过程中，我持续更新个人博客，撰写并分享关于 Swift 开发的技术文章与学习笔记。<br>为了更好地推广我开发的应用，也为了与更多开发者建立联系，我开始拓展媒体平台，例如 Apple<br>播客与微信公众号，分享我的开发心得、学习方法和独立创作的思考。我相信技术不仅是工具，更是一种连接的力量。 如果你对 iOS/macOS<br>应用开发、独立开发者的成长路径，或是 Swift 编程语言感兴趣，欢迎关注我的节目，一起学习、交流、成长。 目前已上线三款 iOS<br>应用（存钱猪猪、方方块和汇率仓库）和一款 macOS 图片压缩工具（轻压图片），产品方向主要聚焦在实用型工具类应用。当前正在开发两个免费项目：一款 macOS<br>截图工具，以及一款面向初学者的 Swift 教学应用，欢迎大家体验与反馈。 | [↗](https://open.spotify.com/show/5BxXjSjsZ1UmOEeFDhShqF) |
 | **🪐Terraform: From Zero to Production** | The Terraform Associate certification is for cloud engineers specializing in<br>operations, IT, or development who know the basic concepts and skills of<br>HashiCorp Terraform. While experience using Terraform in production is helpful,<br>performing the exam objectives in a demo environment can be sufficient to pass<br>the exam. The exam expects familiarity with the enterprise features available in<br>HCP Terraform, and what Terraform Community Edition does and does not support. 🎯<br>Ready to test your knowledge? Practice with our free certification quiz app on<br>android Certquest or at | [↗](https://open.spotify.com/show/5taN3x2Hz5tM6NGzb5wI7L) |
 
+</details>
+
 ### Programming Languages
+
+<details>
+<summary>View Podcasts (157)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2251,7 +2298,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **Обучение языку программирования Go (Golang)** | Здесь будут публиковаться чужие видео про язык программирования Go. | [↗](https://podcastindex.org/podcast/6531299) |
 | **Подкаст GolangShow** | Podcast by Подкаст GolangShow. Genres: Technology, Podcasts, Education, How To | [↗](https://podcasts.apple.com/us/podcast/%D0%BF%D0%BE%D0%B4%D0%BA%D0%B0%D1%81%D1%82-golangshow/id1031101295?uo=4) |
 
+</details>
+
 ### Security & Privacy
+
+<details>
+<summary>View Podcasts (240)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2496,7 +2548,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **iNFOSEC** | Podcast by K-12 High Speed Network. Genres: Technology, Podcasts | [↗](https://podcasts.apple.com/us/podcast/infosec/id1191252487?uo=4) |
 | **infosec.live** | Podcast by Simon Linstead. Genres: Technology, Podcasts | [↗](https://podcasts.apple.com/us/podcast/infosec-live/id1654001055?uo=4) |
 
+</details>
+
 ### Web Development
+
+<details>
+<summary>View Podcasts (259)</summary>
 
 | Podcast Name | Description | Website Link |
 | --- | --- | --- |
@@ -2765,13 +2822,12 @@ A community-curated directory of top podcasts for software engineers, developer 
 | **◠◠ ⌗ ajax’s archive !! ₊˚⊹** | ┆[ reqs open !! ] . keep rating under 3 stars ( ⸝⸝´꒳`⸝⸝) ┆ ┆⁀➴ ajax’s archive /<br>info ⟢ ┆ + i upload random stuff ┆ + reqs may take 2-3 days to upload ┆ ┆ ⌗ .<br>owner is ajax / aias ⋮ he.him ⸝⸝ | [↗](https://open.spotify.com/show/4uOwUZOIVmHJtmY3bH4zEe) |
 | **カピぞうの寝言 &#124; HTMLとCSSとWEBデザインと。** | HTML・CSS・Webデザインを学習中の方が楽しく学ぶための作業BGMみたいなポッドキャスト。<br>現役フリーランスのWeb制作者であり書籍著者が現場の話やどうでもいい雑談をゆるく語ります。 累計6万4千部を突破した『これだけで基本がしっかり身につく<br>HTML/CSS&Webデザイン1冊目の本』（通称：カピバラ本）では「正しく、わかりやすく」を心がけて解説していますが、ここでは一人のWeb制作者に戻って台本なしのトークをお届けします。<br>HTML・CSSを学習中の方に向けた学び方やマインドについてを中心に よくある質問に対する答えや最新技術トレンド、 役立つか分からない失敗談や完全な雑談まで。<br>聴くと少しだけWebが楽しくなるかもしれない話を、リラックスした雰囲気でお話しします。 勉強のお供に、通勤のBGMに、あるいは寝る前のひとときに。<br>カピバラの寝言に耳を傾けてみませんか？ 【こんなことを話します】 学習のヒント：無駄の少ない勉強の仕方や伸びる人の特徴<br>技術のヒント：HTML/CSSのちょっとしたコツ 技術トレンド：気になっている新技術やツール 制作裏話：失敗談や、カピバラ本の制作秘話<br>完全な雑談：最近食べたものや、散歩中に考えたこと 【こんな人におすすめ】 「カピバラ本」で勉強中の方 Webデザイン・制作に興味がある方<br>作業中に聴ける、ゆるい技術トークを探している方 | [↗](https://open.spotify.com/show/1uzai0TUDsQS9ZPcSXfrEw) |
 
+</details>
 
-<!-- FOOTER -->
+
 ## About
 
 Maintained by **[Infrasity](https://infrasity.com)**<br>A developer marketing agency helping DevTool startups and B2B SaaS companies with technical content, DevRel strategy, and GTM.
-
-We maintain this list as part of our ongoing research into where developers actually spend their time. If your DevRel or developer marketing team needs help navigating podcast sponsorships or getting your founders booked on the right shows, [let's talk](https://infrasity.com).
 
 [infrasity.com](https://infrasity.com) · [LinkedIn](https://linkedin.com/company/infrasity) 
 
