@@ -68,6 +68,8 @@ DEV_KEYWORDS = [
     ("systems", "Backend & Systems")
 ]
 
+KEYWORDS = [kw for kw, _cat in DEV_KEYWORDS]
+
 def scrape_listennotes_podcasts(api_key, query, category):
     results = []
     search_url = "https://listen-api.listennotes.com/api/v2/search"
@@ -83,14 +85,34 @@ def scrape_listennotes_podcasts(api_key, query, category):
         response = requests.get(search_url, headers=headers, params=params, timeout=10)
         if response.status_code == 200:
             shows = response.json().get("results", [])
+            filtered_out = 0
+            valid_keywords = KEYWORDS + [query.lower()]
+
             for show in shows:
+                title = show.get("title_original") or ""
                 description = show.get("description_original") or ""
+                link = show.get("listennotes_url") or ""
+
+                title_lower = title.lower()
+                desc_lower = description.lower()
+
+                matched = False
+                for kw in valid_keywords:
+                    if kw in title_lower or kw in desc_lower:
+                        matched = True
+                        break
+
+                if not matched:
+                    filtered_out += 1
+                    continue
+
                 results.append({
-                    "title": show.get("title_original") or "",
+                    "title": title,
                     "description": f"**[{category}]** {description}",
-                    "link": show.get("listennotes_url") or ""
+                    "link": link
                 })
-            print(f"[{query}] Kept {len(results)} podcasts.")
+
+            print(f"[{query}] API returned {len(shows)} shows. Filtered out {filtered_out}. Kept {len(results)}.")
         else:
             print(f"[{query}] Error from API: {response.status_code} - {response.text}")
 
