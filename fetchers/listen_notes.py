@@ -128,9 +128,7 @@ def main():
         print("Please sign up at https://www.listennotes.com/api/ to get your key.")
         return
 
-    # Load existing podcasts to aggregate over time. Note: in CI this file is
-    # not persisted between runs (data/ is gitignored, artifacts expire), so this
-    # merge only accumulates across repeated local runs.
+    # Load existing podcasts to aggregate over time.
     filepath = 'data/listennotes.json'
     podcast_map = {}
     if os.path.exists(filepath):
