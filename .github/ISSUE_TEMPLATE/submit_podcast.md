@@ -26,6 +26,10 @@ assignees: ""
 - [ ] Programming Languages
 - [ ] Security & Privacy
 - [ ] Web Development
+- [ ] Other / New Category (If the podcast needs a new category, please specify the category and describe why it is needed below)
+
+**New Category Description (if applicable):**
+
 
 ## Verification
 - [ ] I have verified that this podcast is currently active and.

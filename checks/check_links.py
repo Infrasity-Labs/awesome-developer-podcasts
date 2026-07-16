@@ -12,7 +12,7 @@ def get_known_links(readme_path="README.md"):
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
     # Extract links in markdown format
-    links = re.findall(r'\[.*?\]\((https?://.*?)\)', content)
+    links = re.findall(r'\[.*?\]\((https?://[^\s)]+)\)', content)
     return set(links)
 
 async def check_link(session, url, sem):
@@ -21,19 +21,20 @@ async def check_link(session, url, sem):
     async with sem:
         try:
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-            async with session.head(url, timeout=10, allow_redirects=True, headers=headers) as response:
+            timeout = aiohttp.ClientTimeout(total=10)
+            async with session.head(url, timeout=timeout, allow_redirects=True, headers=headers) as response:
                 if response.status < 400:
                     return True
                 # If HEAD fails or gives Forbidden/Method Not Allowed, try GET
                 if response.status in (405, 403, 429):
-                    async with session.get(url, timeout=10, allow_redirects=True, headers=headers) as get_resp:
+                    async with session.get(url, timeout=timeout, allow_redirects=True, headers=headers) as get_resp:
                         return get_resp.status < 400
                 return False
         except Exception as e:
             return False
 
 async def process_file(filepath, session, sem, known_links):
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding='utf-8') as f:
         try:
             podcasts = json.load(f)
         except json.JSONDecodeError:
@@ -66,7 +67,7 @@ async def process_file(filepath, session, sem, known_links):
             if is_valid:
                 valid_podcasts.append(p)
     
-    with open(filepath, 'w') as f:
+    with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(valid_podcasts, f, indent=4)
         
     print(f"{filepath}: Kept {len(valid_podcasts)} out of {len(podcasts)} podcasts.")
@@ -79,8 +80,8 @@ async def main():
     
     connector = aiohttp.TCPConnector(limit=20)
     async with aiohttp.ClientSession(connector=connector) as session:
-        for file in files:
-            await process_file(file, session, sem, known_links)
+        tasks = [process_file(f, session, sem, known_links) for f in files]
+        await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
     start = time.time()
