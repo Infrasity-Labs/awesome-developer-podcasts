@@ -4,9 +4,14 @@ import textwrap
 import re
 from collections import defaultdict
 
+def normalize_title(title):
+    # Collapse case, whitespace, and punctuation differences (e.g. "Syntax.fm"
+    # vs "Syntax.Fm" vs "Syntax fm ") down to the same key.
+    return re.sub(r'[^a-z0-9]', '', title.strip().lower())
+
 def update_readme():
     podcasts = {}
-    
+
     # Read all JSON files produced by fetchers
     for filepath in glob.glob("data/*.json"):
         try:
@@ -14,8 +19,9 @@ def update_readme():
                 data = json.load(f)
                 for item in data:
                     title = item.get('title', '').strip()
-                    if title and title not in podcasts:
-                        podcasts[title] = item
+                    key = normalize_title(title)
+                    if key and key not in podcasts:
+                        podcasts[key] = item
         except Exception as e:
             print(f"Error reading {filepath}: {e}")
             
@@ -54,8 +60,9 @@ def update_readme():
     # Group podcasts into verticals dynamically
     verticals = defaultdict(list)
     
-    for title in sorted(podcasts.keys()):
-        p = podcasts[title]
+    for key in sorted(podcasts.keys()):
+        p = podcasts[key]
+        title = p.get('title', '').strip()
         raw_desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
         # Remove raw URLs, domain names, and leftover link fragments from description 
         # to prevent ugly formatting and broken links in the table
