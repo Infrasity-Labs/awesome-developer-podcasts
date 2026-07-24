@@ -1,13 +1,13 @@
-import requests
 from bs4 import BeautifulSoup
 import json
+from retry import get_with_backoff
 
 def fetch_feedspot_podcasts():
     url = "https://podcast.feedspot.com/programming_podcasts/"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
-    response = requests.get(url, headers=headers)
+    response = get_with_backoff(url, headers=headers)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
     

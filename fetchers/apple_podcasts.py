@@ -1,7 +1,7 @@
 import json
 import os
-import requests
 import time
+from retry import get_with_backoff
 
 try:
     from fetchers.config import DEV_KEYWORDS
@@ -20,7 +20,7 @@ def scrape_apple_podcasts(query, category):
     }
     
     try:
-        response = requests.get(search_url, params=params, timeout=10)
+        response = get_with_backoff(search_url, params=params, timeout=10)
         if response.status_code == 200:
             data = response.json()
             shows = data.get("results", [])

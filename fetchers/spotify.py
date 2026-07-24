@@ -1,6 +1,6 @@
 import json
 import os
-import requests
+from retry import get_with_backoff, post_with_backoff
 
 try:
     from dotenv import load_dotenv
@@ -15,7 +15,7 @@ except ModuleNotFoundError:
 
 def get_spotify_token(client_id, client_secret):
     auth_url = "https://accounts.spotify.com/api/token"
-    response = requests.post(auth_url, data={
+    response = post_with_backoff(auth_url, data={
         "grant_type": "client_credentials",
         "client_id": client_id,
         "client_secret": client_secret
@@ -47,7 +47,7 @@ def scrape_spotify_podcasts(token, query, category):
         }
         
         try:
-            response = requests.get(search_url, headers=headers, params=params, timeout=10)
+            response = get_with_backoff(search_url, headers=headers, params=params, timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 shows = data.get("shows", {}).get("items", [])

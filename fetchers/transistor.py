@@ -1,10 +1,10 @@
-import requests
 from bs4 import BeautifulSoup
 import json
+from retry import get_with_backoff
 
 def fetch_podcasts():
     url = "https://transistor.fm/dev-podcasts/"
-    response = requests.get(url)
+    response = get_with_backoff(url)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 
