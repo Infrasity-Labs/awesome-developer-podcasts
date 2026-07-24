@@ -24,6 +24,7 @@ jobs:
           - spotify
           - syntax
           - transistor
+          - listen_notes
           
     steps:
       - name: Checkout repository
@@ -46,6 +47,7 @@ jobs:
           PODCASTINDEX_API_SECRET: ${{ secrets.PODCASTINDEX_API_SECRET }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          LISTENNOTES_API_KEY: ${{ secrets.LISTENNOTES_API_KEY }}
         run: |
           mkdir -p data
           python "fetchers/${{ matrix.fetcher }}.py"
