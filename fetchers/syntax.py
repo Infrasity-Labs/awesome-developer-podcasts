@@ -3,11 +3,15 @@ import json
 import urllib.parse
 from retry import get_with_backoff
 
+try:
+    from fetchers.utils.user_agents import get_random_user_agent
+except ModuleNotFoundError:
+    from utils.user_agents import get_random_user_agent
+
 def fetch_syntax_episodes():
     url = "https://syntax.fm"
-    # Added a generic user agent just in case
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        'User-Agent': get_random_user_agent()
     }
     response = get_with_backoff(url, headers=headers, timeout=10)
     response.raise_for_status()

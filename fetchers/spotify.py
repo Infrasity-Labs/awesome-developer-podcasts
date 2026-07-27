@@ -10,8 +10,10 @@ except ImportError:
 
 try:
     from fetchers.config import DEV_KEYWORDS
+    from fetchers.utils.user_agents import get_random_user_agent
 except ModuleNotFoundError:
     from config import DEV_KEYWORDS
+    from utils.user_agents import get_random_user_agent
 
 def get_spotify_token(client_id, client_secret):
     auth_url = "https://accounts.spotify.com/api/token"
@@ -19,7 +21,7 @@ def get_spotify_token(client_id, client_secret):
         "grant_type": "client_credentials",
         "client_id": client_id,
         "client_secret": client_secret
-    }, timeout=10)
+    }, headers={"User-Agent": get_random_user_agent()}, timeout=10)
     
     if response.status_code != 200:
         print(f"Error fetching Spotify token: {response.status_code} - {response.text}")
@@ -30,7 +32,8 @@ def get_spotify_token(client_id, client_secret):
 def scrape_spotify_podcasts(token, query, category):
     results = []
     headers = {
-        "Authorization": f"Bearer {token}"
+        "Authorization": f"Bearer {token}",
+        "User-Agent": get_random_user_agent()
     }
     
     search_url = "https://api.spotify.com/v1/search"

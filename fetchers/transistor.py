@@ -2,9 +2,15 @@ from bs4 import BeautifulSoup
 import json
 from retry import get_with_backoff
 
+try:
+    from fetchers.utils.user_agents import get_random_user_agent
+except ModuleNotFoundError:
+    from utils.user_agents import get_random_user_agent
+
 def fetch_podcasts():
     url = "https://transistor.fm/dev-podcasts/"
-    response = get_with_backoff(url)
+    headers = {"User-Agent": get_random_user_agent()}
+    response = get_with_backoff(url, headers=headers)
     response.raise_for_status()
     soup = BeautifulSoup(response.content, 'html.parser')
 

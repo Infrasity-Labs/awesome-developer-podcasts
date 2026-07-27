@@ -64,6 +64,17 @@ If you want to improve existing Python fetchers, fix bugs, or add new ones, here
 
 5. Check that the `README.md` file updated correctly with your changes, and then submit a Pull Request! *(Note: The `data/` directory should not be committed)*.
 
+**Adding a new fetcher?** If your fetcher makes outbound HTTP requests via `requests`, use the shared `get_random_user_agent()` utility from `fetchers/utils/user_agents.py` to set the `User-Agent` header, instead of hardcoding one or leaving it blank. This helps avoid getting blocked (e.g. `429 Too Many Requests`) by sites that detect repeated automated traffic:
+
+```python
+from fetchers.utils.user_agents import get_random_user_agent
+
+headers = {"User-Agent": get_random_user_agent()}
+response = requests.get(url, headers=headers, timeout=10)
+```
+
+(Fetchers using Playwright or an SDK that handles requests internally, like `podcastindex_fetcher.py`, don't need this — they already set their own User-Agent or don't call `requests` directly.)
+
 ---
 
 ### 4. Pull Request Guidelines

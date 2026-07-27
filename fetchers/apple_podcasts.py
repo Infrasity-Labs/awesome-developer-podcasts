@@ -5,8 +5,10 @@ from retry import get_with_backoff
 
 try:
     from fetchers.config import DEV_KEYWORDS
+    from fetchers.utils.user_agents import get_random_user_agent
 except ModuleNotFoundError:
     from config import DEV_KEYWORDS
+    from utils.user_agents import get_random_user_agent
 
 def scrape_apple_podcasts(query, category):
     results = []
@@ -19,8 +21,9 @@ def scrape_apple_podcasts(query, category):
         "limit": 50
     }
     
-    try:
-        response = get_with_backoff(search_url, params=params, timeout=10)
+   try:
+        headers = {"User-Agent": get_random_user_agent()}
+        response = get_with_backoff(search_url, params=params, headers=headers, timeout=10)
         if response.status_code == 200:
             data = response.json()
             shows = data.get("results", [])
