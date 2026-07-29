@@ -9,6 +9,46 @@ def normalize_title(title):
     # vs "Syntax.Fm" vs "Syntax fm ") down to the same key.
     return re.sub(r'[^a-z0-9]', '', title.strip().lower())
 
+
+def clean_description(raw_desc):
+    """Normalize description text for README table display."""
+    cleaned = (raw_desc or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
+    # Remove raw URLs, domain names, and leftover link fragments from description
+    # to prevent ugly formatting and broken links in the table
+    cleaned = re.sub(
+        r'https?://[^\s<>"]+|www\.[^\s<>"]+|\b\w+\.(?:com|io|org|net|co|se|fm)\b/?\S*|https\.\.\.',
+        '',
+        cleaned,
+        flags=re.IGNORECASE,
+    ).strip()
+    # Clean up any leftover double spaces caused by the regex
+    cleaned = re.sub(r'\s{2,}', ' ', cleaned)
+    return cleaned
+
+
+def detect_vertical_and_description(raw_desc):
+    """Detect vertical category from a **[Tag]** prefix and return (vertical, desc)."""
+    match = re.match(r'^\*\*\[(.*?)\]\*\*\s*(.*)', raw_desc, flags=re.IGNORECASE)
+    if match:
+        tag = match.group(1).strip()
+        if tag.upper() == "GTM":
+            vertical = "GTM"
+        elif tag.lower() in ("software engineering & general tech", "software engineering and general tech"):
+            vertical = "Software Engineering & Development"
+        else:
+            vertical = tag.title()
+        desc = match.group(2).strip()
+    else:
+        vertical = "Software Engineering & Development"
+        desc = raw_desc
+    return vertical, desc
+
+
+def github_anchor_slug(name):
+    """Create a GitHub-compatible anchor slug from a vertical name."""
+    return re.sub(r'[^\w\- ]', '', name.lower()).replace(' ', '-')
+
+
 def update_readme():
     podcasts = {}
 
@@ -63,29 +103,11 @@ def update_readme():
     for key in sorted(podcasts.keys()):
         p = podcasts[key]
         title = p.get('title', '').strip()
-        raw_desc = (p.get('description') or '').replace('\n', ' ').replace('\r', ' ').replace('|', '&#124;').strip()
-        # Remove raw URLs, domain names, and leftover link fragments from description 
-        # to prevent ugly formatting and broken links in the table
-        raw_desc = re.sub(r'https?://[^\s<>"]+|www\.[^\s<>"]+|\b\w+\.(?:com|io|org|net|co|se|fm)\b/?\S*|https\.\.\.', '', raw_desc, flags=re.IGNORECASE).strip()
-        # Clean up any leftover double spaces caused by the regex
-        raw_desc = re.sub(r'\s{2,}', ' ', raw_desc)
+        raw_desc = clean_description(p.get('description'))
         safe_title = title.replace('|', '&#124;')
         link = (p.get('link') or '').strip()
-        
-        # Determine vertical dynamically
-        match = re.match(r'^\*\*\[(.*?)\]\*\*\s*(.*)', raw_desc, flags=re.IGNORECASE)
-        if match:
-            tag = match.group(1).strip()
-            if tag.upper() == "GTM":
-                vertical = "GTM"
-            elif tag.lower() in ("software engineering & general tech", "software engineering and general tech"):
-                vertical = "Software Engineering & Development"
-            else:
-                vertical = tag.title()
-            desc = match.group(2).strip()
-        else:
-            vertical = "Software Engineering & Development"
-            desc = raw_desc
+
+        vertical, desc = detect_vertical_and_description(raw_desc)
             
         # Word wrap the description to prevent horizontal scrolling
         desc = '<br>'.join(textwrap.wrap(desc, width=80, break_long_words=False, break_on_hyphens=False))
@@ -109,7 +131,7 @@ def update_readme():
     for vertical_name in sorted_verticals:
         if verticals[vertical_name]:
             # Create GitHub-compatible anchor link
-            anchor = re.sub(r'[^\w\- ]', '', vertical_name.lower()).replace(' ', '-')
+            anchor = github_anchor_slug(vertical_name)
             content += f"- [{vertical_name}](#{anchor})\n"
     content += "\n"
         
