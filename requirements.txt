@@ -3,3 +3,4 @@ beautifulsoup4==4.12.3
 python-podcastindex
 codespell
 aiohttp
+pytest
