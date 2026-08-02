@@ -6,6 +6,8 @@ import time
 import os
 import re
 
+from fetchers.utils.logger import logger
+
 def get_known_links(readme_path="README.md"):
     if not os.path.exists(readme_path):
         return set()
@@ -38,7 +40,7 @@ async def process_file(filepath, session, sem, known_links):
         try:
             podcasts = json.load(f)
         except json.JSONDecodeError:
-            print(f"Failed to parse {filepath}")
+            logger.error(f"Failed to parse {filepath}")
             return
             
     if not podcasts:
@@ -59,7 +61,7 @@ async def process_file(filepath, session, sem, known_links):
             podcasts_to_check.append(p)
             tasks.append(check_link(session, url, sem))
             
-    print(f"{filepath}: Skipped checking {len(valid_podcasts)} already known links. Checking {len(podcasts_to_check)} new links...")
+    logger.info(f"{filepath}: Skipped checking {len(valid_podcasts)} already known links. Checking {len(podcasts_to_check)} new links...")
     
     if tasks:
         results = await asyncio.gather(*tasks)
@@ -70,7 +72,7 @@ async def process_file(filepath, session, sem, known_links):
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(valid_podcasts, f, indent=4)
         
-    print(f"{filepath}: Kept {len(valid_podcasts)} out of {len(podcasts)} podcasts.")
+    logger.info(f"{filepath}: Kept {len(valid_podcasts)} out of {len(podcasts)} podcasts.")
 
 async def main():
     known_links = get_known_links()
@@ -86,4 +88,4 @@ async def main():
 if __name__ == "__main__":
     start = time.time()
     asyncio.run(main())
-    print(f"Link checking completed in {time.time() - start:.2f} seconds.")
+    logger.info(f"Link checking completed in {time.time() - start:.2f} seconds.")

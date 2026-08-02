@@ -8,6 +8,8 @@ try:
 except ModuleNotFoundError:
     from utils.user_agents import get_random_user_agent
 
+from fetchers.utils.logger import logger
+
 def fetch_cloudways_podcasts():
     # Use archive.org to bypass Cloudflare protection
     url = "http://web.archive.org/web/20230601000000/https://www.cloudways.com/blog/best-coding-podcasts/"
@@ -91,11 +93,11 @@ def fetch_cloudways_podcasts():
     return podcasts
 
 def main():
-    print("Fetching Cloudways podcasts via Archive.org...")
+    logger.info("Fetching Cloudways podcasts via Archive.org...")
     try:
         podcasts = fetch_cloudways_podcasts()
     except Exception as e:
-        print(f"Failed to fetch or parse: {e}")
+        logger.error(f"Failed to fetch or parse: {e}")
         podcasts = []
         
     import os
@@ -103,7 +105,7 @@ def main():
     with open('data/cloudways.json', 'w') as f:
         json.dump(podcasts, f, indent=4)
         
-    print(f"Saved {len(podcasts)} podcasts to cloudways.json")
+    logger.info(f"Saved {len(podcasts)} podcasts to cloudways.json")
 
 if __name__ == "__main__":
     main()

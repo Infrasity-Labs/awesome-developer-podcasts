@@ -10,6 +10,8 @@ except ModuleNotFoundError:
     from config import DEV_KEYWORDS
     from utils.user_agents import get_random_user_agent
 
+from fetchers.utils.logger import logger
+
 def scrape_apple_podcasts(query, category):
     results = []
     search_url = "https://itunes.apple.com/search"
@@ -20,8 +22,8 @@ def scrape_apple_podcasts(query, category):
         "entity": "podcast",
         "limit": 50
     }
-    
-   try:
+
+    try:
         headers = {"User-Agent": get_random_user_agent()}
         response = get_with_backoff(search_url, params=params, headers=headers, timeout=10)
         if response.status_code == 200:
@@ -61,12 +63,12 @@ def scrape_apple_podcasts(query, category):
                     "link": link
                 })
                 
-            print(f"[{query}] API returned {len(shows)} shows. Filtered out {filtered_out}. Kept {len(results)}.")
+            logger.info(f"[{query}] API returned {len(shows)} shows. Filtered out {filtered_out}. Kept {len(results)}.")
         else:
-            print(f"[{query}] Error from API: {response.status_code} - {response.text}")
+            logger.error(f"[{query}] Error from API: {response.status_code} - {response.text}")
             
     except Exception as e:
-        print(f"[{query}] Error fetching via API: {e}")
+        logger.error(f"[{query}] Error fetching via API: {e}")
         
     return results
 
@@ -90,7 +92,7 @@ def main():
     for category, queries in search_map.items():
         for q in queries:
             podcasts = scrape_apple_podcasts(q, category)
-            print(f"Fetched {len(podcasts)} podcasts for '{q}' via Apple Podcasts API")
+            logger.info(f"Fetched {len(podcasts)} podcasts for '{q}' via Apple Podcasts API")
             all_podcasts.extend(podcasts)
             time.sleep(2)
             
@@ -99,7 +101,7 @@ def main():
     with open('data/apple_podcasts.json', "w", encoding="utf-8") as f:
         json.dump(all_podcasts, f, indent=4)
         
-    print(f"Saved {len(all_podcasts)} podcasts to apple_podcasts.json")
+    logger.info(f"Saved {len(all_podcasts)} podcasts to apple_podcasts.json")
 
 if __name__ == "__main__":
     main()

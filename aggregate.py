@@ -4,6 +4,8 @@ import textwrap
 import re
 from collections import defaultdict
 
+from fetchers.utils.logger import logger
+
 def normalize_title(title):
     # Collapse case, whitespace, and punctuation differences (e.g. "Syntax.fm"
     # vs "Syntax.Fm" vs "Syntax fm ") down to the same key.
@@ -23,10 +25,10 @@ def update_readme():
                     if key and key not in podcasts:
                         podcasts[key] = item
         except Exception as e:
-            print(f"Error reading {filepath}: {e}")
+            logger.error(f"Error reading {filepath}: {e}")
             
     if not podcasts:
-        print("No podcasts found in JSON files.")
+        logger.warning("No podcasts found in JSON files.")
         return
         
     # Preserve existing header and footer
@@ -129,7 +131,7 @@ def update_readme():
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(content.strip() + '\n')
         
-    print(f"README.md successfully updated with {len(podcasts)} total podcasts across {len(verticals)} verticals!")
+    logger.info(f"README.md successfully updated with {len(podcasts)} total podcasts across {len(verticals)} verticals!")
 
 if __name__ == "__main__":
     update_readme()

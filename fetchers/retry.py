@@ -4,6 +4,8 @@ from email.utils import parsedate_to_datetime
 
 import requests
 
+from fetchers.utils.logger import logger
+
 
 DEFAULT_MAX_RETRIES = 3
 DEFAULT_BACKOFF_FACTOR = 1
@@ -48,7 +50,7 @@ def retry_on_rate_limit(func):
             if delay is None:
                 delay = _backoff_seconds(attempt, backoff_factor, max_backoff)
 
-            print(f"Rate limited by {url}. Retrying in {delay}s ({attempt}/{max_retries})...")
+            logger.info(f"Rate limited by {url}. Retrying in {delay}s ({attempt}/{max_retries})...")
             time.sleep(delay)
 
         return response
