@@ -8,6 +8,8 @@ try:
 except ModuleNotFoundError:
     from utils.user_agents import get_random_user_agent
 
+from fetchers.utils.logger import logger
+
 def fetch_syntax_episodes():
     url = "https://syntax.fm"
     headers = {
@@ -22,7 +24,7 @@ def fetch_syntax_episodes():
     # Scrape the first 5 pages to get the 50 most recent episodes
     for page in range(1, 6):
         page_url = f"{url}/shows?page={page}"
-        print(f"Fetching {page_url}...")
+        logger.info(f"Fetching {page_url}...")
         
         response = get_with_backoff(page_url, headers=headers, timeout=10)
         if response.status_code != 200:
@@ -66,4 +68,4 @@ if __name__ == "__main__":
     os.makedirs('data', exist_ok=True)
     with open('data/syntax.json', 'w') as f:
         json.dump(episodes, f, indent=4)
-    print(f"Saved {len(episodes)} episodes to syntax.json")
+    logger.info(f"Saved {len(episodes)} episodes to syntax.json")

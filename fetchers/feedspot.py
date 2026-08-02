@@ -7,6 +7,8 @@ try:
 except ModuleNotFoundError:
     from utils.user_agents import get_random_user_agent
 
+from fetchers.utils.logger import logger
+
 def fetch_feedspot_podcasts():
     url = "https://podcast.feedspot.com/programming_podcasts/"
     headers = {
@@ -55,4 +57,4 @@ if __name__ == "__main__":
     os.makedirs('data', exist_ok=True)
     with open('data/feedspot.json', 'w') as f:
         json.dump(podcasts, f, indent=4)
-    print(f"Saved {len(podcasts)} podcasts to feedspot.json")
+    logger.info(f"Saved {len(podcasts)} podcasts to feedspot.json")

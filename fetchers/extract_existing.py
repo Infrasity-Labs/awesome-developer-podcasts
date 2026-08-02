@@ -1,6 +1,8 @@
 import json
 import re
 
+from fetchers.utils.logger import logger
+
 def extract():
     podcasts = []
     current_category = "Software Engineering & Development"
@@ -47,7 +49,7 @@ def extract():
     os.makedirs('data', exist_ok=True)
     with open('data/existing.json', 'w', encoding='utf-8') as f:
         json.dump(podcasts, f, indent=4)
-    print(f"Extracted {len(podcasts)} existing podcasts into existing.json")
+    logger.info(f"Extracted {len(podcasts)} existing podcasts into existing.json")
 
 if __name__ == '__main__':
     extract()

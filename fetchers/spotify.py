@@ -15,6 +15,8 @@ except ModuleNotFoundError:
     from config import DEV_KEYWORDS
     from utils.user_agents import get_random_user_agent
 
+from fetchers.utils.logger import logger
+
 def get_spotify_token(client_id, client_secret):
     auth_url = "https://accounts.spotify.com/api/token"
     response = post_with_backoff(auth_url, data={
@@ -24,7 +26,7 @@ def get_spotify_token(client_id, client_secret):
     }, headers={"User-Agent": get_random_user_agent()}, timeout=10)
     
     if response.status_code != 200:
-        print(f"Error fetching Spotify token: {response.status_code} - {response.text}")
+        logger.error(f"Error fetching Spotify token: {response.status_code} - {response.text}")
         return None
         
     return response.json().get("access_token")
@@ -58,10 +60,10 @@ def scrape_spotify_podcasts(token, query, category):
                     break
                 all_shows.extend(shows)
             else:
-                print(f"[{query}] Error from API: {response.status_code} - {response.text}")
+                logger.error(f"[{query}] Error from API: {response.status_code} - {response.text}")
                 break
         except Exception as e:
-            print(f"[{query}] Error fetching via API: {e}")
+            logger.error(f"[{query}] Error fetching via API: {e}")
             break
             
     filtered_out = 0
@@ -97,7 +99,7 @@ def scrape_spotify_podcasts(token, query, category):
             "link": link
         })
         
-    print(f"[{query}] API returned {len(all_shows)} shows. Filtered out {filtered_out}. Kept {len(results)}.")
+    logger.info(f"[{query}] API returned {len(all_shows)} shows. Filtered out {filtered_out}. Kept {len(results)}.")
     return results
 
 def main():
@@ -105,8 +107,8 @@ def main():
     client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
     
     if not client_id or not client_secret:
-        print("ERROR: SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables are missing.")
-        print("Please provide them in the .env file or as environment variables.")
+        logger.error("ERROR: SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables are missing.")
+        logger.error("Please provide them in the .env file or as environment variables.")
         return
         
     token = get_spotify_token(client_id, client_secret)
@@ -132,7 +134,7 @@ def main():
     for category, queries in search_map.items():
         for q in queries:
             podcasts = scrape_spotify_podcasts(token, q, category)
-            print(f"Fetched {len(podcasts)} podcasts for '{q}' via Spotify API")
+            logger.info(f"Fetched {len(podcasts)} podcasts for '{q}' via Spotify API")
             all_podcasts.extend(podcasts)
             
     # Write to spotify.json
@@ -140,7 +142,7 @@ def main():
     with open('data/spotify.json', "w", encoding="utf-8") as f:
         json.dump(all_podcasts, f, indent=4)
         
-    print(f"Saved {len(all_podcasts)} podcasts to spotify.json")
+    logger.info(f"Saved {len(all_podcasts)} podcasts to spotify.json")
 
 if __name__ == "__main__":
     main()

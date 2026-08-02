@@ -12,6 +12,8 @@ try:
 except ModuleNotFoundError:
     from config import DEV_KEYWORDS
 
+from utils.logger import configure_logger, logger
+
 def scrape_podcasts(index, query, category):
     results = []
     try:
@@ -53,15 +55,16 @@ def scrape_podcasts(index, query, category):
                     "link": link
                 })
                 
-            print(f"[{query}] API returned {total_feeds} feeds. Filtered out {filtered_out}. Kept {len(results)}.")
+            logger.info(f"[{query}] API returned {total_feeds} feeds. Filtered out {filtered_out}. Kept {len(results)}.")
         else:
-            print(f"[{query}] Warning: Unexpected API response or status not 'true': {response}")
-            
+            logger.warning(f"[{query}] Unexpected API response or status not 'true': {response}")
+
     except Exception as e:
-        print(f"[{query}] Error fetching via API: {e}")
+        logger.error(f"[{query}] Error fetching via API: {e}")
     return results
 
 def main():
+    configure_logger()
     try:
         from dotenv import load_dotenv
         load_dotenv()
@@ -72,8 +75,8 @@ def main():
     api_secret = os.environ.get("PODCASTINDEX_API_SECRET")
     
     if not api_key or not api_secret:
-        print("ERROR: PODCASTINDEX_API_KEY or PODCASTINDEX_API_SECRET environment variables are missing.")
-        print("Please sign up at https://api.podcastindex.org/ to get your keys.")
+        logger.error("PODCASTINDEX_API_KEY or PODCASTINDEX_API_SECRET environment variables are missing.")
+        logger.error("Please sign up at https://api.podcastindex.org/ to get your keys.")
         return
         
     config = {
@@ -101,7 +104,7 @@ def main():
     for category, queries in search_map.items():
         for q in queries:
             podcasts = scrape_podcasts(index, q, category)
-            print(f"Fetched {len(podcasts)} podcasts for '{q}' via API")
+            logger.info(f"Fetched {len(podcasts)} podcasts for '{q}' via API")
             all_podcasts.extend(podcasts)
             
     # Write to podcastindex.json
@@ -109,7 +112,7 @@ def main():
     with open('data/podcastindex.json', "w") as f:
         json.dump(all_podcasts, f, indent=4)
         
-    print(f"Saved {len(all_podcasts)} podcasts to podcastindex.json")
+    logger.info(f"Saved {len(all_podcasts)} podcasts to podcastindex.json")
 
 if __name__ == "__main__":
     main()
