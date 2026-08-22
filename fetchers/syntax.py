@@ -13,9 +13,6 @@ def fetch_syntax_episodes():
     headers = {
         'User-Agent': get_random_user_agent()
     }
-    response = get_with_backoff(url, headers=headers, timeout=10)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.content, 'html.parser')
 
     episodes = []
     
