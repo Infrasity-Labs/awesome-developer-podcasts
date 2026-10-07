@@ -1,14 +1,14 @@
-import json
-import os
 import time
 from retry import get_with_backoff
 
 try:
     from fetchers.config import DEV_KEYWORDS
     from fetchers.utils.user_agents import get_random_user_agent
+    from fetchers.utils.save import save_podcasts
 except ModuleNotFoundError:
     from config import DEV_KEYWORDS
     from utils.user_agents import get_random_user_agent
+    from utils.save import save_podcasts
 
 def scrape_apple_podcasts(query, category):
     results = []
@@ -94,12 +94,7 @@ def main():
             all_podcasts.extend(podcasts)
             time.sleep(2)
             
-    # Write to apple_podcasts.json
-    os.makedirs('data', exist_ok=True)
-    with open('data/apple_podcasts.json', "w", encoding="utf-8") as f:
-        json.dump(all_podcasts, f, indent=4)
-        
-    print(f"Saved {len(all_podcasts)} podcasts to apple_podcasts.json")
+    save_podcasts("apple_podcasts.json", all_podcasts)
 
 if __name__ == "__main__":
     main()

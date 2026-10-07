@@ -1,12 +1,13 @@
 from bs4 import BeautifulSoup
-import json
 import urllib.parse
 from retry import get_with_backoff
 
 try:
     from fetchers.utils.user_agents import get_random_user_agent
+    from fetchers.utils.save import save_podcasts
 except ModuleNotFoundError:
     from utils.user_agents import get_random_user_agent
+    from utils.save import save_podcasts
 
 def fetch_syntax_episodes():
     url = "https://syntax.fm"
@@ -62,8 +63,4 @@ def fetch_syntax_episodes():
 
 if __name__ == "__main__":
     episodes = fetch_syntax_episodes()
-    import os
-    os.makedirs('data', exist_ok=True)
-    with open('data/syntax.json', 'w') as f:
-        json.dump(episodes, f, indent=4)
-    print(f"Saved {len(episodes)} episodes to syntax.json")
+    save_podcasts("syntax.json", episodes)
