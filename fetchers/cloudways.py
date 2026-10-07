@@ -1,12 +1,13 @@
-import json
 import re
 from bs4 import BeautifulSoup
 from retry import get_with_backoff
 
 try:
     from fetchers.utils.user_agents import get_random_user_agent
+    from fetchers.utils.save import save_podcasts
 except ModuleNotFoundError:
     from utils.user_agents import get_random_user_agent
+    from utils.save import save_podcasts
 
 def fetch_cloudways_podcasts():
     # Use archive.org to bypass Cloudflare protection
@@ -98,12 +99,7 @@ def main():
         print(f"Failed to fetch or parse: {e}")
         podcasts = []
         
-    import os
-    os.makedirs('data', exist_ok=True)
-    with open('data/cloudways.json', 'w') as f:
-        json.dump(podcasts, f, indent=4)
-        
-    print(f"Saved {len(podcasts)} podcasts to cloudways.json")
+    save_podcasts("cloudways.json", podcasts)
 
 if __name__ == "__main__":
     main()
